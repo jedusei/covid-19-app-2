@@ -80,7 +80,9 @@ export default function VerificationScreen({ route, navigation }) {
                             setLoading(true);
                             setTimeout(() => {
                                 setLoading(false);
-                                if (code != "12345")
+                                if (code == "12345")
+                                    navigation.reset({ index: 0, routes: [{ name: 'GeneralInfoScreen' }] });
+                                else
                                     alert("The code you entered is invalid.");
                             }, 2000);
                         }

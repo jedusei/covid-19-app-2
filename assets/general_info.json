@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Background",
+        "content": "Citizens are advised to provide accurate information on this application to support the government and health services in managing and accurately containing the spread of the coronavirus."
+    },
+    {
+        "title": "Collection of your information",
+        "content": "We may collect information about you in a variety of ways. The information we may collect via the Application depends on the content and material you use, and includes:"
+    },
+    {
+        "title": "Personal information",
+        "content": "Demographic and other personally-identifiable information that you voluntarily give to us while using this application is anonymized and is only made available to the relevant authorities in case of emergency."
+    },
+    {
+        "title": "Geo-location information",
+        "content": "We may request permission to access location-based information from your mobile device, including your mobile device's bluetooth or GPS. If you wish to change our access or permissions, you may do so in the app's settings."
+    },
+    {
+        "title": "Push notifications",
+        "content": "We may request permission to send you push notifications regarding your account or the Application. If you wish to opt out from receiving these notifications, you may turn them off in the app's settings."
+    },
+    {
+        "title": "Use of your information",
+        "content": "Having accurate information about permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the application to\n- Assist the relevant authorities to respond to suspected\n  COVID-19 cases\n- Compile anonymous statistical data and analysis\n- Deliver targeted notifications concerning COVID-19 to you\n- Monitor and analyze usage trends to inform sensitization\n  efforts"
+    },
+    {
+        "title": "Disclosure of your information",
+        "content": "We will be sharing anonymized information we collect about you with the relevant government agencies and health services."
+    },
+    {
+        "title": "Options regarding your information",
+        "content": "You may at any time review or change the information in your account or terminate your account, by going to the appropriate section in the Application's settings.\n\nUpon requesting to terminate your account, we will deactivate and delete your account and information from our actuve databases. However, some information may be retained to prevent fraud, troubleshoot problems, assist with any investigations, enforce our Terms of Use and/or comply with legal requirements."
+    }
+]
