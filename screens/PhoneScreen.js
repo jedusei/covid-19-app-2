@@ -62,11 +62,11 @@ export default function PhoneScreen({ navigation }) {
     const [isValid, setValid] = React.useState(false);
     const [isLoading, setLoading] = React.useState(false);
     return (
-        <ImageBackground source={require('../assets/covid-19-bg.jpg')} style={styles.bg_image}>
+        <ImageBackground source={require('../assets/covid-19-bg.jpg')} fadeDuration={0} style={styles.bg_image}>
             <StatusBar barStyle='light-content' backgroundColor='transparent' translucent={true} />
             <View style={styles.container}>
                 <Text style={styles.h1}>COVERS</Text>
-                <Text style={styles.h2}>(COVID-19 EMERGENCY RESPONSE SYSTEM)</Text>
+                <Text style={styles.h2}>COVID-19 EMERGENCY RESPONSE SYSTEM</Text>
                 <Text style={styles.h3}>Join the effort by well-meaning Africans using technology to slow down and eventually halt the spread of COVID-19.</Text>
                 <View style={styles.text_field}>
                     <Text style={{ opacity: 0.5, marginRight: 17 }}>Phone Number:</Text>

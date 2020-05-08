@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
         padding: 20,
         backgroundColor: '#fff'
     },
@@ -51,8 +52,6 @@ export default function VerificationScreen({ route, navigation }) {
     const [isLoading, setLoading] = React.useState(false);
 
     return (
-        <View style={{ flex: 1 }}>
-            <StatusBar barStyle="dark-content" translucent={false} />
             <View style={styles.container}>
                 <Text style={styles.h1}>Verification PIN</Text>
                 <Text style={styles.h2}>

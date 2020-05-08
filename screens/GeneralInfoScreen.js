@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     View, Text, StyleSheet,
-    TouchableNativeFeedback, StatusBar
+    TouchableNativeFeedback
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -38,10 +38,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function GeneralInfoScreen() {
+export default function GeneralInfoScreen({ navigation }) {
     return (
         <View style={{ flex: 1 }}>
-            <StatusBar barStyle="dark-content" backgroundColor="#fff" translucent={false} />
             <View style={styles.header}>
                 <Text style={styles.h1}>General Information</Text>
             </View>
