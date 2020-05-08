@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function PhoneScreen() {
+export default function PhoneScreen({ navigation }) {
     const [phoneNumber, setPhoneNumber] = React.useState("");
     const [isValid, setValid] = React.useState(false);
     const [isLoading, setLoading] = React.useState(false);
@@ -84,11 +84,14 @@ export default function PhoneScreen() {
                     }
                 </View>
                 <TouchableNativeFeedback
-                    disabled={!isValid}
+                    disabled={!isValid || isLoading}
                     onPress={() => {
                         if (!isLoading) {
                             setLoading(true);
-                            setTimeout(setLoading, 2000, false);
+                            setTimeout(() => {
+                                setLoading(false);
+                                navigation.navigate('VerificationScreen', { phoneNumber });
+                            }, 2000);
                         }
                     }}>
                     <View style={isValid ? styles.btn : styles.btn_disabled}>
