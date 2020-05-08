@@ -51,7 +51,7 @@ export default function GeneralInfoScreen({ navigation }) {
                         <Text>{section.content}</Text>
                     </View>
                 )}
-                <TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Dashboard' }] })}>
                     <View style={styles.btn}>
                         <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>OK</Text>
                     </View>

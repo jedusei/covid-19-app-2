@@ -6,6 +6,7 @@ import { StatusBar } from 'react-native';
 import PhoneScreen from './screens/PhoneScreen';
 import VerificationScreen from './screens/VerificationScreen';
 import GeneralInfoScreen from './screens/GeneralInfoScreen';
+import Dashboard from './screens/Dashboard';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="PhoneScreen" component={PhoneScreen} options={{ headerShown: false }} />
         <Stack.Screen name="VerificationScreen" component={VerificationScreen} />
         <Stack.Screen name="GeneralInfoScreen" component={GeneralInfoScreen} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
