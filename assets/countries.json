@@ -1,0 +1,1067 @@
+[
+    {
+        "id": "0",
+        "name": "None",
+        "flag": "https://disease.sh/assets/img/flags/unknown.png"
+    },
+    {
+        "id": "1",
+        "name": "Afghanistan",
+        "flag": "https://disease.sh/assets/img/flags/af.png"
+    },
+    {
+        "id": "2",
+        "name": "Albania",
+        "flag": "https://disease.sh/assets/img/flags/al.png"
+    },
+    {
+        "id": "3",
+        "name": "Algeria",
+        "flag": "https://disease.sh/assets/img/flags/dz.png"
+    },
+    {
+        "id": "4",
+        "name": "Andorra",
+        "flag": "https://disease.sh/assets/img/flags/ad.png"
+    },
+    {
+        "id": "5",
+        "name": "Angola",
+        "flag": "https://disease.sh/assets/img/flags/ao.png"
+    },
+    {
+        "id": "6",
+        "name": "Anguilla",
+        "flag": "https://disease.sh/assets/img/flags/ai.png"
+    },
+    {
+        "id": "7",
+        "name": "Antigua and Barbuda",
+        "flag": "https://disease.sh/assets/img/flags/ag.png"
+    },
+    {
+        "id": "8",
+        "name": "Argentina",
+        "flag": "https://disease.sh/assets/img/flags/ar.png"
+    },
+    {
+        "id": "9",
+        "name": "Armenia",
+        "flag": "https://disease.sh/assets/img/flags/am.png"
+    },
+    {
+        "id": "10",
+        "name": "Aruba",
+        "flag": "https://disease.sh/assets/img/flags/aw.png"
+    },
+    {
+        "id": "11",
+        "name": "Australia",
+        "flag": "https://disease.sh/assets/img/flags/au.png"
+    },
+    {
+        "id": "12",
+        "name": "Austria",
+        "flag": "https://disease.sh/assets/img/flags/at.png"
+    },
+    {
+        "id": "13",
+        "name": "Azerbaijan",
+        "flag": "https://disease.sh/assets/img/flags/az.png"
+    },
+    {
+        "id": "14",
+        "name": "Bahamas",
+        "flag": "https://disease.sh/assets/img/flags/bs.png"
+    },
+    {
+        "id": "15",
+        "name": "Bahrain",
+        "flag": "https://disease.sh/assets/img/flags/bh.png"
+    },
+    {
+        "id": "16",
+        "name": "Bangladesh",
+        "flag": "https://disease.sh/assets/img/flags/bd.png"
+    },
+    {
+        "id": "17",
+        "name": "Barbados",
+        "flag": "https://disease.sh/assets/img/flags/bb.png"
+    },
+    {
+        "id": "18",
+        "name": "Belarus",
+        "flag": "https://disease.sh/assets/img/flags/by.png"
+    },
+    {
+        "id": "19",
+        "name": "Belgium",
+        "flag": "https://disease.sh/assets/img/flags/be.png"
+    },
+    {
+        "id": "20",
+        "name": "Belize",
+        "flag": "https://disease.sh/assets/img/flags/bz.png"
+    },
+    {
+        "id": "21",
+        "name": "Benin",
+        "flag": "https://disease.sh/assets/img/flags/bj.png"
+    },
+    {
+        "id": "22",
+        "name": "Bermuda",
+        "flag": "https://disease.sh/assets/img/flags/bm.png"
+    },
+    {
+        "id": "23",
+        "name": "Bhutan",
+        "flag": "https://disease.sh/assets/img/flags/bt.png"
+    },
+    {
+        "id": "24",
+        "name": "Bolivia",
+        "flag": "https://disease.sh/assets/img/flags/bo.png"
+    },
+    {
+        "id": "25",
+        "name": "Bosnia",
+        "flag": "https://disease.sh/assets/img/flags/ba.png"
+    },
+    {
+        "id": "26",
+        "name": "Botswana",
+        "flag": "https://disease.sh/assets/img/flags/bw.png"
+    },
+    {
+        "id": "27",
+        "name": "Brazil",
+        "flag": "https://disease.sh/assets/img/flags/br.png"
+    },
+    {
+        "id": "28",
+        "name": "British Virgin Islands",
+        "flag": "https://disease.sh/assets/img/flags/vg.png"
+    },
+    {
+        "id": "29",
+        "name": "Brunei",
+        "flag": "https://disease.sh/assets/img/flags/bn.png"
+    },
+    {
+        "id": "30",
+        "name": "Bulgaria",
+        "flag": "https://disease.sh/assets/img/flags/bg.png"
+    },
+    {
+        "id": "31",
+        "name": "Burkina Faso",
+        "flag": "https://disease.sh/assets/img/flags/bf.png"
+    },
+    {
+        "id": "32",
+        "name": "Burundi",
+        "flag": "https://disease.sh/assets/img/flags/bi.png"
+    },
+    {
+        "id": "33",
+        "name": "Cabo Verde",
+        "flag": "https://disease.sh/assets/img/flags/cv.png"
+    },
+    {
+        "id": "34",
+        "name": "Cambodia",
+        "flag": "https://disease.sh/assets/img/flags/kh.png"
+    },
+    {
+        "id": "35",
+        "name": "Cameroon",
+        "flag": "https://disease.sh/assets/img/flags/cm.png"
+    },
+    {
+        "id": "36",
+        "name": "Canada",
+        "flag": "https://disease.sh/assets/img/flags/ca.png"
+    },
+    {
+        "id": "37",
+        "name": "Caribbean Netherlands",
+        "flag": "https://disease.sh/assets/img/flags/bq.png"
+    },
+    {
+        "id": "38",
+        "name": "Cayman Islands",
+        "flag": "https://disease.sh/assets/img/flags/ky.png"
+    },
+    {
+        "id": "39",
+        "name": "Central African Republic",
+        "flag": "https://disease.sh/assets/img/flags/cf.png"
+    },
+    {
+        "id": "40",
+        "name": "Chad",
+        "flag": "https://disease.sh/assets/img/flags/td.png"
+    },
+    {
+        "id": "41",
+        "name": "Channel Islands",
+        "flag": "https://disease.sh/assets/img/flags/je.png"
+    },
+    {
+        "id": "42",
+        "name": "Chile",
+        "flag": "https://disease.sh/assets/img/flags/cl.png"
+    },
+    {
+        "id": "43",
+        "name": "China",
+        "flag": "https://disease.sh/assets/img/flags/cn.png"
+    },
+    {
+        "id": "44",
+        "name": "Colombia",
+        "flag": "https://disease.sh/assets/img/flags/co.png"
+    },
+    {
+        "id": "45",
+        "name": "Comoros",
+        "flag": "https://disease.sh/assets/img/flags/km.png"
+    },
+    {
+        "id": "46",
+        "name": "Congo",
+        "flag": "https://disease.sh/assets/img/flags/cg.png"
+    },
+    {
+        "id": "47",
+        "name": "Costa Rica",
+        "flag": "https://disease.sh/assets/img/flags/cr.png"
+    },
+    {
+        "id": "48",
+        "name": "Croatia",
+        "flag": "https://disease.sh/assets/img/flags/hr.png"
+    },
+    {
+        "id": "49",
+        "name": "Cuba",
+        "flag": "https://disease.sh/assets/img/flags/cu.png"
+    },
+    {
+        "id": "50",
+        "name": "Curaçao",
+        "flag": "https://disease.sh/assets/img/flags/cw.png"
+    },
+    {
+        "id": "51",
+        "name": "Cyprus",
+        "flag": "https://disease.sh/assets/img/flags/cy.png"
+    },
+    {
+        "id": "52",
+        "name": "Czechia",
+        "flag": "https://disease.sh/assets/img/flags/cz.png"
+    },
+    {
+        "id": "53",
+        "name": "Côte d'Ivoire",
+        "flag": "https://disease.sh/assets/img/flags/ci.png"
+    },
+    {
+        "id": "54",
+        "name": "DRC",
+        "flag": "https://disease.sh/assets/img/flags/cd.png"
+    },
+    {
+        "id": "55",
+        "name": "Denmark",
+        "flag": "https://disease.sh/assets/img/flags/dk.png"
+    },
+    {
+        "id": "56",
+        "name": "Djibouti",
+        "flag": "https://disease.sh/assets/img/flags/dj.png"
+    },
+    {
+        "id": "57",
+        "name": "Dominica",
+        "flag": "https://disease.sh/assets/img/flags/dm.png"
+    },
+    {
+        "id": "58",
+        "name": "Dominican Republic",
+        "flag": "https://disease.sh/assets/img/flags/do.png"
+    },
+    {
+        "id": "59",
+        "name": "Ecuador",
+        "flag": "https://disease.sh/assets/img/flags/ec.png"
+    },
+    {
+        "id": "60",
+        "name": "Egypt",
+        "flag": "https://disease.sh/assets/img/flags/eg.png"
+    },
+    {
+        "id": "61",
+        "name": "El Salvador",
+        "flag": "https://disease.sh/assets/img/flags/sv.png"
+    },
+    {
+        "id": "62",
+        "name": "Equatorial Guinea",
+        "flag": "https://disease.sh/assets/img/flags/gq.png"
+    },
+    {
+        "id": "63",
+        "name": "Eritrea",
+        "flag": "https://disease.sh/assets/img/flags/er.png"
+    },
+    {
+        "id": "64",
+        "name": "Estonia",
+        "flag": "https://disease.sh/assets/img/flags/ee.png"
+    },
+    {
+        "id": "65",
+        "name": "Ethiopia",
+        "flag": "https://disease.sh/assets/img/flags/et.png"
+    },
+    {
+        "id": "66",
+        "name": "Falkland Islands (Malvinas)",
+        "flag": "https://disease.sh/assets/img/flags/fk.png"
+    },
+    {
+        "id": "67",
+        "name": "Faroe Islands",
+        "flag": "https://disease.sh/assets/img/flags/fo.png"
+    },
+    {
+        "id": "68",
+        "name": "Fiji",
+        "flag": "https://disease.sh/assets/img/flags/fj.png"
+    },
+    {
+        "id": "69",
+        "name": "Finland",
+        "flag": "https://disease.sh/assets/img/flags/fi.png"
+    },
+    {
+        "id": "70",
+        "name": "France",
+        "flag": "https://disease.sh/assets/img/flags/fr.png"
+    },
+    {
+        "id": "71",
+        "name": "French Guiana",
+        "flag": "https://disease.sh/assets/img/flags/gf.png"
+    },
+    {
+        "id": "72",
+        "name": "French Polynesia",
+        "flag": "https://disease.sh/assets/img/flags/pf.png"
+    },
+    {
+        "id": "73",
+        "name": "Gabon",
+        "flag": "https://disease.sh/assets/img/flags/ga.png"
+    },
+    {
+        "id": "74",
+        "name": "Gambia",
+        "flag": "https://disease.sh/assets/img/flags/gm.png"
+    },
+    {
+        "id": "75",
+        "name": "Georgia",
+        "flag": "https://disease.sh/assets/img/flags/ge.png"
+    },
+    {
+        "id": "76",
+        "name": "Germany",
+        "flag": "https://disease.sh/assets/img/flags/de.png"
+    },
+    {
+        "id": "77",
+        "name": "Ghana",
+        "flag": "https://disease.sh/assets/img/flags/gh.png"
+    },
+    {
+        "id": "78",
+        "name": "Gibraltar",
+        "flag": "https://disease.sh/assets/img/flags/gi.png"
+    },
+    {
+        "id": "79",
+        "name": "Greece",
+        "flag": "https://disease.sh/assets/img/flags/gr.png"
+    },
+    {
+        "id": "80",
+        "name": "Greenland",
+        "flag": "https://disease.sh/assets/img/flags/gl.png"
+    },
+    {
+        "id": "81",
+        "name": "Grenada",
+        "flag": "https://disease.sh/assets/img/flags/gd.png"
+    },
+    {
+        "id": "82",
+        "name": "Guadeloupe",
+        "flag": "https://disease.sh/assets/img/flags/gp.png"
+    },
+    {
+        "id": "83",
+        "name": "Guatemala",
+        "flag": "https://disease.sh/assets/img/flags/gt.png"
+    },
+    {
+        "id": "84",
+        "name": "Guinea",
+        "flag": "https://disease.sh/assets/img/flags/gn.png"
+    },
+    {
+        "id": "85",
+        "name": "Guinea-Bissau",
+        "flag": "https://disease.sh/assets/img/flags/gw.png"
+    },
+    {
+        "id": "86",
+        "name": "Guyana",
+        "flag": "https://disease.sh/assets/img/flags/gy.png"
+    },
+    {
+        "id": "87",
+        "name": "Haiti",
+        "flag": "https://disease.sh/assets/img/flags/ht.png"
+    },
+    {
+        "id": "88",
+        "name": "Holy See (Vatican City State)",
+        "flag": "https://disease.sh/assets/img/flags/va.png"
+    },
+    {
+        "id": "89",
+        "name": "Honduras",
+        "flag": "https://disease.sh/assets/img/flags/hn.png"
+    },
+    {
+        "id": "90",
+        "name": "Hong Kong",
+        "flag": "https://disease.sh/assets/img/flags/hk.png"
+    },
+    {
+        "id": "91",
+        "name": "Hungary",
+        "flag": "https://disease.sh/assets/img/flags/hu.png"
+    },
+    {
+        "id": "92",
+        "name": "Iceland",
+        "flag": "https://disease.sh/assets/img/flags/is.png"
+    },
+    {
+        "id": "93",
+        "name": "India",
+        "flag": "https://disease.sh/assets/img/flags/in.png"
+    },
+    {
+        "id": "94",
+        "name": "Indonesia",
+        "flag": "https://disease.sh/assets/img/flags/id.png"
+    },
+    {
+        "id": "95",
+        "name": "Iran",
+        "flag": "https://disease.sh/assets/img/flags/ir.png"
+    },
+    {
+        "id": "96",
+        "name": "Iraq",
+        "flag": "https://disease.sh/assets/img/flags/iq.png"
+    },
+    {
+        "id": "97",
+        "name": "Ireland",
+        "flag": "https://disease.sh/assets/img/flags/ie.png"
+    },
+    {
+        "id": "98",
+        "name": "Isle of Man",
+        "flag": "https://disease.sh/assets/img/flags/im.png"
+    },
+    {
+        "id": "99",
+        "name": "Israel",
+        "flag": "https://disease.sh/assets/img/flags/il.png"
+    },
+    {
+        "id": "100",
+        "name": "Italy",
+        "flag": "https://disease.sh/assets/img/flags/it.png"
+    },
+    {
+        "id": "101",
+        "name": "Jamaica",
+        "flag": "https://disease.sh/assets/img/flags/jm.png"
+    },
+    {
+        "id": "102",
+        "name": "Japan",
+        "flag": "https://disease.sh/assets/img/flags/jp.png"
+    },
+    {
+        "id": "103",
+        "name": "Jordan",
+        "flag": "https://disease.sh/assets/img/flags/jo.png"
+    },
+    {
+        "id": "104",
+        "name": "Kazakhstan",
+        "flag": "https://disease.sh/assets/img/flags/kz.png"
+    },
+    {
+        "id": "105",
+        "name": "Kenya",
+        "flag": "https://disease.sh/assets/img/flags/ke.png"
+    },
+    {
+        "id": "106",
+        "name": "Kuwait",
+        "flag": "https://disease.sh/assets/img/flags/kw.png"
+    },
+    {
+        "id": "107",
+        "name": "Kyrgyzstan",
+        "flag": "https://disease.sh/assets/img/flags/kg.png"
+    },
+    {
+        "id": "108",
+        "name": "Lao People's Democratic Republic",
+        "flag": "https://disease.sh/assets/img/flags/la.png"
+    },
+    {
+        "id": "109",
+        "name": "Latvia",
+        "flag": "https://disease.sh/assets/img/flags/lv.png"
+    },
+    {
+        "id": "110",
+        "name": "Lebanon",
+        "flag": "https://disease.sh/assets/img/flags/lb.png"
+    },
+    {
+        "id": "111",
+        "name": "Liberia",
+        "flag": "https://disease.sh/assets/img/flags/lr.png"
+    },
+    {
+        "id": "112",
+        "name": "Libyan Arab Jamahiriya",
+        "flag": "https://disease.sh/assets/img/flags/ly.png"
+    },
+    {
+        "id": "113",
+        "name": "Liechtenstein",
+        "flag": "https://disease.sh/assets/img/flags/li.png"
+    },
+    {
+        "id": "114",
+        "name": "Lithuania",
+        "flag": "https://disease.sh/assets/img/flags/lt.png"
+    },
+    {
+        "id": "115",
+        "name": "Luxembourg",
+        "flag": "https://disease.sh/assets/img/flags/lu.png"
+    },
+    {
+        "id": "116",
+        "name": "Macao",
+        "flag": "https://disease.sh/assets/img/flags/mo.png"
+    },
+    {
+        "id": "117",
+        "name": "Macedonia",
+        "flag": "https://disease.sh/assets/img/flags/mk.png"
+    },
+    {
+        "id": "118",
+        "name": "Madagascar",
+        "flag": "https://disease.sh/assets/img/flags/mg.png"
+    },
+    {
+        "id": "119",
+        "name": "Malawi",
+        "flag": "https://disease.sh/assets/img/flags/mw.png"
+    },
+    {
+        "id": "120",
+        "name": "Malaysia",
+        "flag": "https://disease.sh/assets/img/flags/my.png"
+    },
+    {
+        "id": "121",
+        "name": "Maldives",
+        "flag": "https://disease.sh/assets/img/flags/mv.png"
+    },
+    {
+        "id": "122",
+        "name": "Mali",
+        "flag": "https://disease.sh/assets/img/flags/ml.png"
+    },
+    {
+        "id": "123",
+        "name": "Malta",
+        "flag": "https://disease.sh/assets/img/flags/mt.png"
+    },
+    {
+        "id": "124",
+        "name": "Martinique",
+        "flag": "https://disease.sh/assets/img/flags/mq.png"
+    },
+    {
+        "id": "125",
+        "name": "Mauritania",
+        "flag": "https://disease.sh/assets/img/flags/mr.png"
+    },
+    {
+        "id": "126",
+        "name": "Mauritius",
+        "flag": "https://disease.sh/assets/img/flags/mu.png"
+    },
+    {
+        "id": "127",
+        "name": "Mayotte",
+        "flag": "https://disease.sh/assets/img/flags/yt.png"
+    },
+    {
+        "id": "128",
+        "name": "Mexico",
+        "flag": "https://disease.sh/assets/img/flags/mx.png"
+    },
+    {
+        "id": "129",
+        "name": "Moldova",
+        "flag": "https://disease.sh/assets/img/flags/md.png"
+    },
+    {
+        "id": "130",
+        "name": "Monaco",
+        "flag": "https://disease.sh/assets/img/flags/mc.png"
+    },
+    {
+        "id": "131",
+        "name": "Mongolia",
+        "flag": "https://disease.sh/assets/img/flags/mn.png"
+    },
+    {
+        "id": "132",
+        "name": "Montenegro",
+        "flag": "https://disease.sh/assets/img/flags/me.png"
+    },
+    {
+        "id": "133",
+        "name": "Montserrat",
+        "flag": "https://disease.sh/assets/img/flags/ms.png"
+    },
+    {
+        "id": "134",
+        "name": "Morocco",
+        "flag": "https://disease.sh/assets/img/flags/ma.png"
+    },
+    {
+        "id": "135",
+        "name": "Mozambique",
+        "flag": "https://disease.sh/assets/img/flags/mz.png"
+    },
+    {
+        "id": "136",
+        "name": "Myanmar",
+        "flag": "https://disease.sh/assets/img/flags/mm.png"
+    },
+    {
+        "id": "137",
+        "name": "Namibia",
+        "flag": "https://disease.sh/assets/img/flags/na.png"
+    },
+    {
+        "id": "138",
+        "name": "Nepal",
+        "flag": "https://disease.sh/assets/img/flags/np.png"
+    },
+    {
+        "id": "139",
+        "name": "Netherlands",
+        "flag": "https://disease.sh/assets/img/flags/nl.png"
+    },
+    {
+        "id": "140",
+        "name": "New Caledonia",
+        "flag": "https://disease.sh/assets/img/flags/nc.png"
+    },
+    {
+        "id": "141",
+        "name": "New Zealand",
+        "flag": "https://disease.sh/assets/img/flags/nz.png"
+    },
+    {
+        "id": "142",
+        "name": "Nicaragua",
+        "flag": "https://disease.sh/assets/img/flags/ni.png"
+    },
+    {
+        "id": "143",
+        "name": "Niger",
+        "flag": "https://disease.sh/assets/img/flags/ne.png"
+    },
+    {
+        "id": "144",
+        "name": "Nigeria",
+        "flag": "https://disease.sh/assets/img/flags/ng.png"
+    },
+    {
+        "id": "145",
+        "name": "Norway",
+        "flag": "https://disease.sh/assets/img/flags/no.png"
+    },
+    {
+        "id": "146",
+        "name": "Oman",
+        "flag": "https://disease.sh/assets/img/flags/om.png"
+    },
+    {
+        "id": "147",
+        "name": "Pakistan",
+        "flag": "https://disease.sh/assets/img/flags/pk.png"
+    },
+    {
+        "id": "148",
+        "name": "Palestine",
+        "flag": "https://disease.sh/assets/img/flags/ps.png"
+    },
+    {
+        "id": "149",
+        "name": "Panama",
+        "flag": "https://disease.sh/assets/img/flags/pa.png"
+    },
+    {
+        "id": "150",
+        "name": "Papua New Guinea",
+        "flag": "https://disease.sh/assets/img/flags/pg.png"
+    },
+    {
+        "id": "151",
+        "name": "Paraguay",
+        "flag": "https://disease.sh/assets/img/flags/py.png"
+    },
+    {
+        "id": "152",
+        "name": "Peru",
+        "flag": "https://disease.sh/assets/img/flags/pe.png"
+    },
+    {
+        "id": "153",
+        "name": "Philippines",
+        "flag": "https://disease.sh/assets/img/flags/ph.png"
+    },
+    {
+        "id": "154",
+        "name": "Poland",
+        "flag": "https://disease.sh/assets/img/flags/pl.png"
+    },
+    {
+        "id": "155",
+        "name": "Portugal",
+        "flag": "https://disease.sh/assets/img/flags/pt.png"
+    },
+    {
+        "id": "156",
+        "name": "Qatar",
+        "flag": "https://disease.sh/assets/img/flags/qa.png"
+    },
+    {
+        "id": "157",
+        "name": "Romania",
+        "flag": "https://disease.sh/assets/img/flags/ro.png"
+    },
+    {
+        "id": "158",
+        "name": "Russia",
+        "flag": "https://disease.sh/assets/img/flags/ru.png"
+    },
+    {
+        "id": "159",
+        "name": "Rwanda",
+        "flag": "https://disease.sh/assets/img/flags/rw.png"
+    },
+    {
+        "id": "160",
+        "name": "Réunion",
+        "flag": "https://disease.sh/assets/img/flags/re.png"
+    },
+    {
+        "id": "161",
+        "name": "S. Korea",
+        "flag": "https://disease.sh/assets/img/flags/kr.png"
+    },
+    {
+        "id": "162",
+        "name": "Saint Kitts and Nevis",
+        "flag": "https://disease.sh/assets/img/flags/kn.png"
+    },
+    {
+        "id": "163",
+        "name": "Saint Lucia",
+        "flag": "https://disease.sh/assets/img/flags/lc.png"
+    },
+    {
+        "id": "164",
+        "name": "Saint Martin",
+        "flag": "https://disease.sh/assets/img/flags/mf.png"
+    },
+    {
+        "id": "165",
+        "name": "Saint Pierre Miquelon",
+        "flag": "https://disease.sh/assets/img/flags/pm.png"
+    },
+    {
+        "id": "166",
+        "name": "Saint Vincent and the Grenadines",
+        "flag": "https://disease.sh/assets/img/flags/vc.png"
+    },
+    {
+        "id": "167",
+        "name": "San Marino",
+        "flag": "https://disease.sh/assets/img/flags/sm.png"
+    },
+    {
+        "id": "168",
+        "name": "Sao Tome and Principe",
+        "flag": "https://disease.sh/assets/img/flags/st.png"
+    },
+    {
+        "id": "169",
+        "name": "Saudi Arabia",
+        "flag": "https://disease.sh/assets/img/flags/sa.png"
+    },
+    {
+        "id": "170",
+        "name": "Senegal",
+        "flag": "https://disease.sh/assets/img/flags/sn.png"
+    },
+    {
+        "id": "171",
+        "name": "Serbia",
+        "flag": "https://disease.sh/assets/img/flags/rs.png"
+    },
+    {
+        "id": "172",
+        "name": "Seychelles",
+        "flag": "https://disease.sh/assets/img/flags/sc.png"
+    },
+    {
+        "id": "173",
+        "name": "Sierra Leone",
+        "flag": "https://disease.sh/assets/img/flags/sl.png"
+    },
+    {
+        "id": "174",
+        "name": "Singapore",
+        "flag": "https://disease.sh/assets/img/flags/sg.png"
+    },
+    {
+        "id": "175",
+        "name": "Sint Maarten",
+        "flag": "https://disease.sh/assets/img/flags/sx.png"
+    },
+    {
+        "id": "176",
+        "name": "Slovakia",
+        "flag": "https://disease.sh/assets/img/flags/sk.png"
+    },
+    {
+        "id": "177",
+        "name": "Slovenia",
+        "flag": "https://disease.sh/assets/img/flags/si.png"
+    },
+    {
+        "id": "178",
+        "name": "Somalia",
+        "flag": "https://disease.sh/assets/img/flags/so.png"
+    },
+    {
+        "id": "179",
+        "name": "South Africa",
+        "flag": "https://disease.sh/assets/img/flags/za.png"
+    },
+    {
+        "id": "180",
+        "name": "South Sudan",
+        "flag": "https://disease.sh/assets/img/flags/ss.png"
+    },
+    {
+        "id": "181",
+        "name": "Spain",
+        "flag": "https://disease.sh/assets/img/flags/es.png"
+    },
+    {
+        "id": "182",
+        "name": "Sri Lanka",
+        "flag": "https://disease.sh/assets/img/flags/lk.png"
+    },
+    {
+        "id": "183",
+        "name": "St. Barth",
+        "flag": "https://disease.sh/assets/img/flags/bl.png"
+    },
+    {
+        "id": "184",
+        "name": "Sudan",
+        "flag": "https://disease.sh/assets/img/flags/sd.png"
+    },
+    {
+        "id": "185",
+        "name": "Suriname",
+        "flag": "https://disease.sh/assets/img/flags/sr.png"
+    },
+    {
+        "id": "186",
+        "name": "Swaziland",
+        "flag": "https://disease.sh/assets/img/flags/sz.png"
+    },
+    {
+        "id": "187",
+        "name": "Sweden",
+        "flag": "https://disease.sh/assets/img/flags/se.png"
+    },
+    {
+        "id": "188",
+        "name": "Switzerland",
+        "flag": "https://disease.sh/assets/img/flags/ch.png"
+    },
+    {
+        "id": "189",
+        "name": "Syrian Arab Republic",
+        "flag": "https://disease.sh/assets/img/flags/sy.png"
+    },
+    {
+        "id": "190",
+        "name": "Taiwan",
+        "flag": "https://disease.sh/assets/img/flags/tw.png"
+    },
+    {
+        "id": "191",
+        "name": "Tajikistan",
+        "flag": "https://disease.sh/assets/img/flags/tj.png"
+    },
+    {
+        "id": "192",
+        "name": "Tanzania",
+        "flag": "https://disease.sh/assets/img/flags/tz.png"
+    },
+    {
+        "id": "193",
+        "name": "Thailand",
+        "flag": "https://disease.sh/assets/img/flags/th.png"
+    },
+    {
+        "id": "194",
+        "name": "Timor-Leste",
+        "flag": "https://disease.sh/assets/img/flags/tl.png"
+    },
+    {
+        "id": "195",
+        "name": "Togo",
+        "flag": "https://disease.sh/assets/img/flags/tg.png"
+    },
+    {
+        "id": "196",
+        "name": "Trinidad and Tobago",
+        "flag": "https://disease.sh/assets/img/flags/tt.png"
+    },
+    {
+        "id": "197",
+        "name": "Tunisia",
+        "flag": "https://disease.sh/assets/img/flags/tn.png"
+    },
+    {
+        "id": "198",
+        "name": "Turkey",
+        "flag": "https://disease.sh/assets/img/flags/tr.png"
+    },
+    {
+        "id": "199",
+        "name": "Turks and Caicos Islands",
+        "flag": "https://disease.sh/assets/img/flags/tc.png"
+    },
+    {
+        "id": "200",
+        "name": "UAE",
+        "flag": "https://disease.sh/assets/img/flags/ae.png"
+    },
+    {
+        "id": "201",
+        "name": "UK",
+        "flag": "https://disease.sh/assets/img/flags/gb.png"
+    },
+    {
+        "id": "202",
+        "name": "USA",
+        "flag": "https://disease.sh/assets/img/flags/us.png"
+    },
+    {
+        "id": "203",
+        "name": "Uganda",
+        "flag": "https://disease.sh/assets/img/flags/ug.png"
+    },
+    {
+        "id": "204",
+        "name": "Ukraine",
+        "flag": "https://disease.sh/assets/img/flags/ua.png"
+    },
+    {
+        "id": "205",
+        "name": "Uruguay",
+        "flag": "https://disease.sh/assets/img/flags/uy.png"
+    },
+    {
+        "id": "206",
+        "name": "Uzbekistan",
+        "flag": "https://disease.sh/assets/img/flags/uz.png"
+    },
+    {
+        "id": "207",
+        "name": "Venezuela",
+        "flag": "https://disease.sh/assets/img/flags/ve.png"
+    },
+    {
+        "id": "208",
+        "name": "Vietnam",
+        "flag": "https://disease.sh/assets/img/flags/vn.png"
+    },
+    {
+        "id": "209",
+        "name": "Western Sahara",
+        "flag": "https://disease.sh/assets/img/flags/eh.png"
+    },
+    {
+        "id": "210",
+        "name": "Yemen",
+        "flag": "https://disease.sh/assets/img/flags/ye.png"
+    },
+    {
+        "id": "211",
+        "name": "Zambia",
+        "flag": "https://disease.sh/assets/img/flags/zm.png"
+    },
+    {
+        "id": "212",
+        "name": "Zimbabwe",
+        "flag": "https://disease.sh/assets/img/flags/zw.png"
+    }
+]
