@@ -49,7 +49,7 @@ let countries = require('../../assets/countries.json');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     header: {
         flexDirection: 'row',
@@ -222,6 +222,7 @@ export default function Home() {
                         )}
                         data={info.news}
                         keyExtractor={(item, index) => String(index)}
+                        contentContainerStyle={{ paddingBottom: 20 }}
                         renderItem={({ item }) => (
                             <View style={{ marginHorizontal: 40, marginVertical: 10 }}>
                                 <View style={{ paddingBottom: 10, marginBottom: 10, borderBottomColor: "#e2e2e2", borderBottomWidth: 1 }}>
