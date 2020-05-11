@@ -69,17 +69,19 @@ export default function Landing({ navigation }) {
                 <Text style={styles.h2}>COVID-19 EMERGENCY RESPONSE SYSTEM</Text>
                 <Text style={styles.h3}>Join the effort by well-meaning Africans using technology to slow down and eventually halt the spread of COVID-19.</Text>
                 <View style={styles.text_field}>
-                    <Text style={{ opacity: 0.5, marginRight: 17 }}>Phone Number:</Text>
                     <TextInput
                         keyboardType="phone-pad"
                         maxLength={10}
+                        placeholder="Phone Number"
                         value={phoneNumber}
                         style={{ flex: 1, fontSize: 20 }}
                         onChangeText={text => {
                             setPhoneNumber(text);
                             setValid(/^0(2[034678]|5[045679])[0-9]{7}/.test(text));
                         }} />
-                    {isValid ||
+                    {isValid ?
+                        <FontAwesome name='check' size={15} color="#6cc340" />
+                        :
                         <FontAwesome name='warning' size={15} color="#dede53" />
                     }
                 </View>
