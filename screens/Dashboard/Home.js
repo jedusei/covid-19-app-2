@@ -12,17 +12,17 @@ const info = {
         {
             label: "Cases",
             img: require('../../assets/covid-19-bg-2.jpg'),
-            value: 641
+            value: 4263
         },
         {
             label: "Recoveries",
             img: require('../../assets/sanitizer_and_mask.jpg'),
-            value: 83
+            value: 378
         },
         {
             label: "Deaths",
             img: require('../../assets/grave.jpg'),
-            value: 6
+            value: 22
         }
     ],
     news: [
@@ -40,6 +40,63 @@ const info = {
         }
     ]
 };
+
+export default function Home() {
+    const [isLoading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        setTimeout(setLoading, 1000, false);
+    }, []);
+
+    return (
+        <>
+            <View style={styles.container}>
+                {isLoading ?
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <ActivityIndicator size={40} />
+                    </View>
+                    : <FlatList
+                        ListHeaderComponent={() => (
+                            <>
+                                <FlatList horizontal
+                                    data={info.stats}
+                                    keyExtractor={(item) => item.label}
+                                    contentContainerStyle={{ backgroundColor: '#f6f6f6', paddingHorizontal: 10 }}
+                                    renderItem={({ item }) => (
+                                        <View style={styles.stat_card}>
+                                            <ImageBackground style={styles.stat_card_img} source={item.img} />
+                                            <TouchableNativeFeedback>
+                                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 20 }}>
+                                                    <Text style={styles.stat_card_title}>{item.label}</Text>
+                                                    <Text style={styles.stat_card_value}>{item.value}</Text>
+                                                </View>
+                                            </TouchableNativeFeedback>
+                                        </View>
+                                    )}
+                                />
+                                <View style={{ padding: 20 }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>News</Text>
+                                    <Text>Last updated {moment(info.updated_at).fromNow()}...</Text>
+                                </View>
+                            </>
+                        )}
+                        data={info.news}
+                        keyExtractor={(item, index) => String(index)}
+                        contentContainerStyle={{ paddingBottom: 20 }}
+                        renderItem={({ item }) => (
+                            <View style={{ marginHorizontal: 40, marginVertical: 10 }}>
+                                <View style={{ paddingBottom: 10, marginBottom: 10, borderBottomColor: "#e2e2e2", borderBottomWidth: 1 }}>
+                                    <Text style={styles.news_title}>{item.title}</Text>
+                                </View>
+                                <Text>{item.content}</Text>
+                            </View>
+                        )}
+                    />
+                }
+            </View>
+        </>
+    );
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -81,6 +138,9 @@ const styles = StyleSheet.create({
         opacity: 0.5
     },
     stat_card_title: {
+        position: 'absolute',
+        top: 5,
+        left: 10,
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 20,
@@ -89,69 +149,10 @@ const styles = StyleSheet.create({
     stat_card_value: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 33
+        fontSize: 53
     },
     news_title: {
         fontWeight: 'bold',
         fontSize: 18
     }
 });
-
-export default function Home() {
-    const [isLoading, setLoading] = React.useState(true);
-
-
-    React.useEffect(() => {
-        setTimeout(setLoading, 1000, false);
-    }, []);
-
-    return (
-        <>
-            <View style={styles.container}>
-                {isLoading ?
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <ActivityIndicator size={40} />
-                    </View>
-                    : <FlatList
-                        ListHeaderComponent={() => (
-                            <>
-                                <FlatList horizontal
-                                    data={info.stats}
-                                    keyExtractor={(item) => item.label}
-                                    contentContainerStyle={{ backgroundColor: '#f6f6f6', paddingHorizontal: 10 }}
-                                    renderItem={({ item }) => (
-                                        <View style={styles.stat_card}>
-                                            <ImageBackground style={styles.stat_card_img} source={item.img} />
-                                            <TouchableNativeFeedback>
-                                                <View style={{ flex: 1, padding: 15, borderRadius: 20 }}>
-                                                    <Text style={styles.stat_card_title}>{item.label}</Text>
-                                                    <Text style={styles.stat_card_value}>{item.value}</Text>
-                                                </View>
-                                            </TouchableNativeFeedback>
-                                        </View>
-                                    )}
-                                />
-                                <View style={{ padding: 20 }}>
-                                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>News</Text>
-                                    <Text>Last Updated: <Text style={{ fontWeight: 'bold' }}>{moment(info.updated_at).format("DD/MM/yyyy [at] hh:mm A")}</Text></Text>
-                                </View>
-                            </>
-                        )}
-                        data={info.news}
-                        keyExtractor={(item, index) => String(index)}
-                        contentContainerStyle={{ paddingBottom: 20 }}
-                        renderItem={({ item }) => (
-                            <View style={{ marginHorizontal: 40, marginVertical: 10 }}>
-                                <View style={{ paddingBottom: 10, marginBottom: 10, borderBottomColor: "#e2e2e2", borderBottomWidth: 1 }}>
-                                    <Text style={styles.news_title}>{item.title}</Text>
-                                </View>
-                                <Text>{item.content}</Text>
-                            </View>
-                        )}
-                    />
-                }
-            </View>
-        </>
-    );
-}
-
