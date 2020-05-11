@@ -12,6 +12,7 @@ import {
     CheckBox, ActivityIndicator, Alert
 } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import moment from 'moment';
 
 const Tab = createBottomTabNavigator();
 const tabs = [
@@ -58,100 +59,9 @@ export default function Dashboard() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: "#e2e2e2",
-        padding: 20
-    },
-    profile_img: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        resizeMode: 'contain'
-    },
-    header_title: {
-        flex: 1,
-        fontSize: 30,
-        fontWeight: 'bold'
-    },
-    modal: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-    modal_header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 20,
-        borderBottomWidth: 1,
-        borderBottomColor: "#e2e2e2"
-    },
-    modal_title: {
-        fontWeight: 'bold',
-        fontSize: 30
-    },
-    modal_body: {
-        paddingTop: 10,
-        paddingHorizontal: 20
-    },
-    section_title: {
-        fontWeight: 'bold',
-        fontSize: 16,
-        marginVertical: 10
-    },
-    text_field: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#e2e2e2',
-        padding: 10,
-        marginVertical: 10
-    },
-    visited_countries_container: {
-        flexDirection: 'row',
-        alignItems: 'stretch',
-        height: 100,
-        marginVertical: 10
-    },
-    visited_country: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#000'
-    },
-    visited_country_flag: {
-        width: 40,
-        height: 30,
-        marginBottom: 5
-    },
-    btn: {
-        alignItems: 'center',
-        paddingVertical: 15,
-        marginVertical: 20,
-        backgroundColor: '#313131'
-    },
-    btn_disabled: {
-        alignSelf: "stretch",
-        alignItems: 'center',
-        paddingVertical: 15,
-        marginVertical: 20,
-        opacity: 0.8,
-        backgroundColor: '#afafaf'
-    }
-});
-
 function Header({ title }) {
     const [showProfile, setShowProfile] = React.useState(false);
+    const [showNotifications, setShowNotifications] = React.useState(false);
     return (
         <>
             <View style={styles.header}>
@@ -161,11 +71,12 @@ function Header({ title }) {
                     </View>
                 </TouchableOpacity>
                 <Text style={styles.header_title}>{title}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setShowNotifications(true)}>
                     <Ionicons name="ios-notifications-outline" size={35} color="black" />
                 </TouchableOpacity>
             </View>
             <ProfileModal visible={showProfile} onRequestClose={() => setShowProfile(false)} />
+            <NotificationsModal visible={showNotifications} onRequestClose={() => setShowNotifications(false)} />
         </>
     );
 }
@@ -316,3 +227,170 @@ function CountriesModal({ visible, selectedCountry, onSelectCountry, onRequestCl
     );
 }
 
+const notifications = [
+    {
+        date: new Date(Date.now() - 5000), // 5 seconds ago
+        message: "Lorem ipsum dolor"
+    },
+    {
+        date: new Date(Date.now() - 300000), // 5 mins ago
+        message: "Lorem ipsum dolor"
+    },
+    {
+        date: new Date(Date.now() - 1800000), // 30 mins ago
+        message: "Lorem ipsum dolor"
+    },
+    {
+        date: new Date(Date.now() - 7200000), // 2 hours ago
+        message: "Lorem ipsum dolor"
+    },
+    {
+        date: new Date(Date.now() - 86400000), // 1 day ago
+        message: "Lorem ipsum dolor"
+    },
+    {
+        date: new Date(Date.now() - 604800000), // 1 week ago
+        message: "Lorem ipsum dolor"
+    }
+];
+function NotificationsModal({ visible, onRequestClose }) {
+    const [isLoading, setLoading] = React.useState(true);
+    function getNotifications() {
+        setLoading(true);
+        setTimeout(setLoading, 1000, false);
+    }
+    return (
+        <Modal animationType='slide' visible={visible} onRequestClose={onRequestClose} onShow={getNotifications}>
+            <View style={styles.modal}>
+                <View style={styles.modal_header}>
+                    <Text style={styles.modal_title}>Notifications</Text>
+                    <TouchableOpacity onPress={onRequestClose}>
+                        <AntDesign name="close" size={25} />
+                    </TouchableOpacity>
+                </View>
+                {isLoading ?
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <ActivityIndicator size={40} />
+                    </View>
+                    :
+                    <FlatList
+                        data={notifications}
+                        keyExtractor={(item) => String(item.date.getTime())}
+                        ItemSeparatorComponent={() => <View style={{ backgroundColor: "#e2e2e2", height: 1 }} />}
+                        renderItem={({ item }) => (
+                            <View style={styles.notif_row}>
+                                <Text style={styles.notif_text}>{item.message}</Text>
+                                <Text style={styles.notif_time}>{moment(item.date).fromNow()}</Text>
+                            </View>
+                        )}
+                    />
+                }
+            </View>
+        </Modal>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: "#e2e2e2",
+        padding: 20
+    },
+    profile_img: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        resizeMode: 'contain'
+    },
+    header_title: {
+        flex: 1,
+        fontSize: 30,
+        fontWeight: 'bold'
+    },
+    modal: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    modal_header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#e2e2e2"
+    },
+    modal_title: {
+        fontWeight: 'bold',
+        fontSize: 30
+    },
+    modal_body: {
+        paddingTop: 10,
+        paddingHorizontal: 20
+    },
+    section_title: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginVertical: 10
+    },
+    text_field: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#e2e2e2',
+        padding: 10,
+        marginVertical: 10
+    },
+    visited_countries_container: {
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        height: 100,
+        marginVertical: 10
+    },
+    visited_country: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#000'
+    },
+    visited_country_flag: {
+        width: 40,
+        height: 30,
+        marginBottom: 5
+    },
+    btn: {
+        alignItems: 'center',
+        paddingVertical: 15,
+        marginVertical: 20,
+        backgroundColor: '#313131'
+    },
+    btn_disabled: {
+        alignSelf: "stretch",
+        alignItems: 'center',
+        paddingVertical: 15,
+        marginVertical: 20,
+        opacity: 0.8,
+        backgroundColor: '#afafaf'
+    },
+    notif_row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 20
+    },
+    notif_text: {
+        fontSize: 18
+    },
+    notif_time: {
+        fontSize: 12,
+        opacity: 0.5
+    }
+});
