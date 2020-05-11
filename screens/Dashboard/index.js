@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign, Entypo, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
 import Home from './Home';
-import Report from './Report';
+import Reports from './Reports';
 import Vitals from './Vitals';
 import Settings from './Settings';
 import {
@@ -17,7 +17,7 @@ import moment from 'moment';
 const Tab = createBottomTabNavigator();
 const tabs = [
     { name: "Home", component: Home },
-    { name: "Report", component: Report },
+    { name: "Reports", title: "Case Reports", component: Reports },
     { name: "Vitals", component: Vitals },
     { name: "Settings", component: Settings }
 ];
@@ -29,7 +29,7 @@ export default function Dashboard() {
                     switch (route.name) {
                         case "Home":
                             return <Entypo name="home" color={color} size={size} />
-                        case "Report":
+                        case "Reports":
                             return <FontAwesome5 name="notes-medical" color={color} size={size} />
                         case "Vitals":
                             return <FontAwesome5 name="heartbeat" color={color} size={size} />
@@ -48,7 +48,7 @@ export default function Dashboard() {
                         let Component = tab.component;
                         return (
                             <View style={styles.container}>
-                                <Header title={tab.name} />
+                                <Header title={tab.title || tab.name} />
                                 <Component />
                             </View>
                         );

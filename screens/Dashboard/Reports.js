@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function Report() {
+export default function Reports() {
     return (
         <View style={styles.container}>
             <Text>Report</Text>
