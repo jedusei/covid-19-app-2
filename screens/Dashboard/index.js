@@ -39,8 +39,7 @@ export default function Dashboard() {
                 }
             })}
             tabBarOptions={{
-                activeTintColor: '#313131',
-                inactiveTintColor: 'gray',
+                activeTintColor: '#313131'
             }}>
             {tabs.map(tab =>
                 <Tab.Screen key={tab.name} name={tab.name}>
