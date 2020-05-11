@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function PhoneScreen({ navigation }) {
+export default function Landing({ navigation }) {
     const [phoneNumber, setPhoneNumber] = React.useState("");
     const [isValid, setValid] = React.useState(false);
     const [isLoading, setLoading] = React.useState(false);
@@ -90,7 +90,7 @@ export default function PhoneScreen({ navigation }) {
                             setLoading(true);
                             setTimeout(() => {
                                 setLoading(false);
-                                navigation.navigate('VerificationScreen', { phoneNumber });
+                                navigation.navigate('Verification', { phoneNumber });
                             }, 2000);
                         }
                     }}>

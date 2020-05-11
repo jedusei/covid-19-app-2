@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function GeneralInfoScreen({ navigation }) {
+export default function GeneralInfo({ navigation }) {
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.header}>

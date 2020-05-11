@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function VerificationScreen({ route, navigation }) {
+export default function Verification({ route, navigation }) {
     const { phoneNumber } = route.params;
     const [code, setCode] = React.useState("");
     const [isValid, setValid] = React.useState(false);
@@ -81,7 +81,7 @@ export default function VerificationScreen({ route, navigation }) {
                             setLoading(false);
                             if (code == "12345") {
                                 await AsyncStorage.setItem('logged_in', "true");
-                                navigation.reset({ index: 0, routes: [{ name: 'GeneralInfoScreen' }] });
+                                navigation.reset({ index: 0, routes: [{ name: 'GeneralInfo' }] });
                             }
                             else {
                                 alert("The code you entered is invalid.");
