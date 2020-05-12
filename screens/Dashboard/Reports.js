@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Text, View, StyleSheet, AsyncStorage,
-    ActivityIndicator, TouchableOpacity, Modal,
+    ActivityIndicator, TouchableOpacity, Modal, StatusBar,
     CheckBox, TextInput, TouchableNativeFeedback, SectionList
 } from 'react-native';
 import FloatingActionButton from '../../components/FloatingActionButton';
@@ -294,37 +294,39 @@ function ViewReportModal({ visible, report, onRequestClose }) {
     return (
         <Modal visible={visible} transparent animationType='fade' onRequestClose={onRequestClose}>
             {visible &&
-                <View style={{ flex: 1, backgroundColor: '#00000030', justifyContent: 'center' }}>
+                <View style={{ flex: 1, backgroundColor: '#000000b0', justifyContent: 'center' }}>
                     <View style={styles.report_details_modal}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+                        <View style={styles.report_details_header}>
                             <Text style={styles.report_details_title}>Report Details</Text>
                             <TouchableOpacity onPress={onRequestClose}>
                                 <AntDesign name="close" size={25} />
                             </TouchableOpacity>
                         </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 1, marginRight: 50 }}>
-                                <Text style={styles.report_details_label}>Individual</Text>
-                                <Text>{report.target}</Text>
+                        <View style={{ margin: 20 }}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flex: 1, marginRight: 50 }}>
+                                    <Text style={styles.report_details_label}>Individual</Text>
+                                    <Text>{report.target}</Text>
+                                </View>
+                                <View style={{ flex: 2 }}>
+                                    <Text style={styles.report_details_label}>Date</Text>
+                                    <Text>{moment(report.date).format("MMMM D, YYYY [at] h:mm A")}</Text>
+                                </View>
                             </View>
-                            <View style={{ flex: 2 }}>
-                                <Text style={styles.report_details_label}>Date</Text>
-                                <Text>{moment(report.date).format("MMMM D, YYYY [at] h:mm A")}</Text>
+                            <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+                                <View style={{ flex: 1, marginRight: 50 }}>
+                                    <Text style={styles.report_details_label}>Location</Text>
+                                    <Text>{report.location}</Text>
+                                </View>
+                                <View style={{ flex: 2 }}>
+                                    <Text style={styles.report_details_label}>Nearest Landmark</Text>
+                                    <Text>{report.landmark}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                            <View style={{ flex: 1, marginRight: 50 }}>
-                                <Text style={styles.report_details_label}>Location</Text>
-                                <Text>{report.location}</Text>
+                            <View style={{ marginBottom: 10 }}>
+                                <Text style={styles.report_details_label}>Description</Text>
+                                <Text>{report.description}</Text>
                             </View>
-                            <View style={{ flex: 2 }}>
-                                <Text style={styles.report_details_label}>Nearest Landmark</Text>
-                                <Text>{report.landmark}</Text>
-                            </View>
-                        </View>
-                        <View style={{ marginBottom: 10 }}>
-                            <Text style={styles.report_details_label}>Description</Text>
-                            <Text>{report.description}</Text>
                         </View>
                     </View>
                 </View>
@@ -395,14 +397,22 @@ const styles = StyleSheet.create({
     report_details_modal: {
         backgroundColor: '#fff',
         borderRadius: 10,
-        padding: 20,
         marginHorizontal: 20,
         elevation: 4
+    },
+    report_details_header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 20,
+        borderBottomColor: '#e2e2e2',
+        borderBottomWidth: 1
     },
     report_details_title: {
         fontSize: 20,
         fontWeight: 'bold'
-    }, report_details_label: {
+    },
+    report_details_label: {
         fontWeight: 'bold',
         opacity: 0.7
     }
