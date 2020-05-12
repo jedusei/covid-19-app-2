@@ -7,6 +7,7 @@ import {
 import FloatingActionButton from '../../components/FloatingActionButton';
 import { AntDesign, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
+import AppModal from '../../components/AppModal';
 import moment from 'moment';
 
 function setDefaultReports() {
@@ -176,123 +177,115 @@ function MakeReportModal({ visible, onMakeReport, onRequestClose }) {
 
     return (
         <>
-            <Modal animationType='slide' visible={visible} onRequestClose={onRequestClose}>
-                <View style={styles.modal}>
-                    <View style={styles.modal_header}>
-                        <Text style={styles.modal_title}>Make Report</Text>
-                        <TouchableOpacity onPress={onRequestClose}>
-                            <AntDesign name="close" size={25} />
-                        </TouchableOpacity>
-                    </View>
-                    <ScrollView contentContainerStyle={styles.modal_body}>
-                        <Text>Who are you reporting?</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginBottom: 10 }}>
-                            <CheckBox value={report.isForSelf} onValueChange={value => setReport({ ...report, isForSelf: value })} />
-                            <Text style={{ marginRight: 20 }}>Self</Text>
-                            <CheckBox value={(report.isForSelf !== undefined) ? !report.isForSelf : false} onValueChange={value => setReport({ ...report, isForSelf: !value })} />
-                            <Text>Other Individual</Text>
-                            {report.isForSelf === undefined &&
-                                <View style={{ flex: 1, marginRight: 10, alignItems: 'flex-end' }}>
-                                    <FontAwesome name='warning' size={15} color="#dede53" />
-                                </View>
-                            }
-                        </View>
-                        {report.isForSelf == false &&
-                            <>
-                                <Text>Full name of other individual</Text>
-                                <View style={styles.text_field}>
-                                    <TextInput
-                                        value={report.target}
-                                        style={{ flex: 1 }}
-                                        onChangeText={text => setReport({ ...report, target: text.trim() })} />
-                                    {report.target.length == 0 &&
-                                        <FontAwesome name='warning' size={15} color="#dede53" />
-                                    }
-                                </View>
-                            </>
+            <AppModal title="Make Report" animationType='slide' visible={visible} onRequestClose={onRequestClose}>
+                <ScrollView contentContainerStyle={{ padding: 20 }}>
+                    <Text>Who are you reporting?</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginBottom: 10 }}>
+                        <CheckBox value={report.isForSelf} onValueChange={value => setReport({ ...report, isForSelf: value })} />
+                        <Text style={{ marginRight: 20 }}>Self</Text>
+                        <CheckBox value={(report.isForSelf !== undefined) ? !report.isForSelf : false} onValueChange={value => setReport({ ...report, isForSelf: !value })} />
+                        <Text>Other Individual</Text>
+                        {report.isForSelf === undefined &&
+                            <View style={{ flex: 1, marginRight: 10, alignItems: 'flex-end' }}>
+                                <FontAwesome name='warning' size={15} color="#dede53" />
+                            </View>
                         }
-                        <Text>Location or Digital Address</Text>
-                        <View style={styles.text_field}>
-                            <TextInput
-                                placeholder="eg. GA-492-74"
-                                value={report.location}
-                                style={{ flex: 1 }}
-                                onChangeText={text => setReport({ ...report, location: text.trim() })} />
-                            {report.location.length == 0 &&
-                                <FontAwesome name='warning' size={15} color="#dede53" />
-                            }
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 3, marginRight: 10 }}>
-                                <Text>Nearest Landmark</Text>
-                                <View style={styles.text_field}>
-                                    <TextInput
-                                        placeholder="eg. Goil Fuel Station"
-                                        value={report.landmark}
-                                        style={{ flex: 1 }}
-                                        onChangeText={text => setReport({ ...report, landmark: text.trim() })} />
-                                    {report.landmark.length == 0 &&
-                                        <FontAwesome name='warning' size={15} color="#dede53" />
-                                    }
-                                </View>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <Text>Alternate Contact</Text>
-                                <View style={styles.text_field}>
-                                    <TextInput
-                                        keyboardType="phone-pad"
-                                        placeholder="Phone Number"
-                                        maxLength={10}
-                                        value={report.contact}
-                                        style={{ flex: 1 }}
-                                        onChangeText={text => {
-                                            setReport({ ...report, contact: text });
-                                            setIsValidContact(text.length ? /^0(2[034678]|5[045679])[0-9]{7}/.test(text) : true)
-                                        }} />
-                                    {isValidContact ||
-                                        <FontAwesome name='warning' size={15} color="#dede53" />
-                                    }
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Text>Description</Text>
-                            {report.description.length == 0 &&
-                                <FontAwesome name='warning' size={15} color="#dede53" />
-                            }
-                        </View>
-                        <TextInput multiline
-                            placeholder="Describe how you're feeling..."
-                            numberOfLines={10}
-                            value={report.description}
-                            style={styles.text_field_multiline}
-                            onChangeText={text => setReport({ ...report, description: text })} />
-                        <TouchableNativeFeedback
-                            disabled={!isValid}
-                            onPress={() => {
-                                setLoading(true);
-                                setTimeout(() => {
-                                    setLoading(false);
-                                    report.date = new Date();
-                                    if (report.isForSelf)
-                                        report.target = 'Self';
-
-                                    delete report.isForSelf;
-                                    onMakeReport(report);
-                                    setReport(initialState);
-                                }, 1000);
-                            }}>
-                            <View style={isValid ? styles.btn : styles.btn_disabled}>
-                                {isLoading ?
-                                    <ActivityIndicator size={27} color="#fff" />
-                                    :
-                                    <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>Report Case</Text>
+                    </View>
+                    {report.isForSelf == false &&
+                        <>
+                            <Text>Full name of other individual</Text>
+                            <View style={styles.text_field}>
+                                <TextInput
+                                    value={report.target}
+                                    style={{ flex: 1 }}
+                                    onChangeText={text => setReport({ ...report, target: text.trim() })} />
+                                {report.target.length == 0 &&
+                                    <FontAwesome name='warning' size={15} color="#dede53" />
                                 }
                             </View>
-                        </TouchableNativeFeedback>
-                    </ScrollView>
-                </View>
-            </Modal>
+                        </>
+                    }
+                    <Text>Location or Digital Address</Text>
+                    <View style={styles.text_field}>
+                        <TextInput
+                            placeholder="eg. GA-492-74"
+                            value={report.location}
+                            style={{ flex: 1 }}
+                            onChangeText={text => setReport({ ...report, location: text.trim() })} />
+                        {report.location.length == 0 &&
+                            <FontAwesome name='warning' size={15} color="#dede53" />
+                        }
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flex: 3, marginRight: 10 }}>
+                            <Text>Nearest Landmark</Text>
+                            <View style={styles.text_field}>
+                                <TextInput
+                                    placeholder="eg. Goil Fuel Station"
+                                    value={report.landmark}
+                                    style={{ flex: 1 }}
+                                    onChangeText={text => setReport({ ...report, landmark: text.trim() })} />
+                                {report.landmark.length == 0 &&
+                                    <FontAwesome name='warning' size={15} color="#dede53" />
+                                }
+                            </View>
+                        </View>
+                        <View style={{ flex: 2 }}>
+                            <Text>Alternate Contact</Text>
+                            <View style={styles.text_field}>
+                                <TextInput
+                                    keyboardType="phone-pad"
+                                    placeholder="Phone Number"
+                                    maxLength={10}
+                                    value={report.contact}
+                                    style={{ flex: 1 }}
+                                    onChangeText={text => {
+                                        setReport({ ...report, contact: text });
+                                        setIsValidContact(text.length ? /^0(2[034678]|5[045679])[0-9]{7}/.test(text) : true)
+                                    }} />
+                                {isValidContact ||
+                                    <FontAwesome name='warning' size={15} color="#dede53" />
+                                }
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Text>Description</Text>
+                        {report.description.length == 0 &&
+                            <FontAwesome name='warning' size={15} color="#dede53" />
+                        }
+                    </View>
+                    <TextInput multiline
+                        placeholder="Describe how you're feeling..."
+                        numberOfLines={10}
+                        value={report.description}
+                        style={styles.text_field_multiline}
+                        onChangeText={text => setReport({ ...report, description: text })} />
+                    <TouchableNativeFeedback
+                        disabled={!isValid}
+                        onPress={() => {
+                            setLoading(true);
+                            setTimeout(() => {
+                                setLoading(false);
+                                report.date = new Date();
+                                if (report.isForSelf)
+                                    report.target = 'Self';
+
+                                delete report.isForSelf;
+                                onMakeReport(report);
+                                setReport(initialState);
+                            }, 1000);
+                        }}>
+                        <View style={isValid ? styles.btn : styles.btn_disabled}>
+                            {isLoading ?
+                                <ActivityIndicator size={27} color="#fff" />
+                                :
+                                <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>Report Case</Text>
+                            }
+                        </View>
+                    </TouchableNativeFeedback>
+                </ScrollView>
+            </AppModal>
         </>
     );
 }
@@ -367,26 +360,6 @@ const styles = StyleSheet.create({
     report_time: {
         fontSize: 12,
         opacity: 0.5
-    },
-    modal: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-    modal_header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 20,
-        borderBottomWidth: 1,
-        borderBottomColor: "#e2e2e2"
-    },
-    modal_title: {
-        fontWeight: 'bold',
-        fontSize: 30
-    },
-    modal_body: {
-        paddingTop: 10,
-        paddingHorizontal: 20
     },
     text_field: {
         flexDirection: 'row',
