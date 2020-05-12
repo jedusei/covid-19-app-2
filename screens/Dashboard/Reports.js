@@ -4,6 +4,7 @@ import {
     ActivityIndicator, TouchableOpacity, Modal,
     CheckBox, TextInput, TouchableNativeFeedback, SectionList
 } from 'react-native';
+import FloatingActionButton from '../../components/FloatingActionButton';
 import { AntDesign, FontAwesome5, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import moment from 'moment';
@@ -88,7 +89,8 @@ function groupReports(reports) {
 
 export default function Reports() {
     const [isLoading, setLoading] = React.useState(true);
-    const [reports, setReports] = React.useState([]);
+    const [showFAB, setShowFAB] = React.useState(false);
+    const [reports, setReports] = React.useState();
     const [showMakeReportModal, setShowMakeReportModal] = React.useState(false);
     const [currentReport, setCurrentReport] = React.useState();
 
@@ -97,10 +99,17 @@ export default function Reports() {
         AsyncStorage.getItem('reports', (err, result) => {
             if (!err) {
                 setReports(JSON.parse(result));
+                // setReports([]);
                 setTimeout(setLoading, 500, false);
             }
         })
     }, []);
+
+    // Show FAB 
+    React.useEffect(() => {
+        if (!isLoading)
+            setTimeout(setShowFAB, 100, true);
+    }, [isLoading]);
 
     return (
         <>
@@ -138,13 +147,9 @@ export default function Reports() {
                             )}
                         />
                 }
-                <View style={{ alignItems: 'center', position: "absolute", left: 0, right: 0, bottom: 40 }}>
-                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("#fff", false)} onPress={() => setShowMakeReportModal(true)}>
-                        <View style={styles.fab}>
-                            <Ionicons name="md-add" color="#fff" size={24} />
-                        </View>
-                    </TouchableNativeFeedback>
-                </View>
+                <FloatingActionButton visible={showFAB} onPress={() => setShowMakeReportModal(true)}>
+                    <Ionicons name="md-add" size={24} color='#fff' />
+                </FloatingActionButton>
             </View>
             <MakeReportModal
                 visible={showMakeReportModal}
@@ -362,15 +367,6 @@ const styles = StyleSheet.create({
     report_time: {
         fontSize: 12,
         opacity: 0.5
-    },
-    fab: {
-        width: 56,
-        height: 56,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#444242',
-        elevation: 4,
-        borderRadius: 40
     },
     modal: {
         flex: 1,
