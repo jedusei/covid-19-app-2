@@ -27,3 +27,37 @@ export function sendCode(phoneNumber) {
         });
 }
 
+export function verifyCode(phoneNumber, code) {
+    return fetch(GRAPHQL_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            query: `
+                mutation verifyCode($input: validateLoginUserInput) {
+                    validateLoginUser(input: $input) {
+                        mobileToken 
+                        user {
+                            age
+                            gender
+                            lastCountriesVisited
+                            licenseNumber
+                        }
+                    }
+                }
+            `,
+            variables: {
+                input: {
+                    phone: phoneNumber,
+                    otp: code
+                }
+            }
+        })
+    })
+        .then(response => response.json())
+        .then(response => {
+            if (response.data)
+                return response.data.validateLoginUser;
+            else
+                return null;
+        });
+}
