@@ -1,28 +1,27 @@
 import React from 'react';
 import {
-    Text, View, StyleSheet,
-    ImageBackground, TouchableNativeFeedback, ActivityIndicator
+    Text, View, StyleSheet, Animated,
+    ImageBackground, TouchableNativeFeedback, ActivityIndicator, Easing
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
+import { getGhanaStats } from '../../api';
 
 const info = {
     updated_at: new Date(),
     stats: [
         {
             label: "Cases",
-            img: require('../../assets/covid-19-bg-2.jpg'),
-            value: 4263
+            img: require('../../assets/covid-19-bg-2.jpg')
         },
         {
             label: "Recoveries",
-            img: require('../../assets/sanitizer_and_mask.jpg'),
-            value: 378
+            img: require('../../assets/sanitizer_and_mask.jpg')
         },
         {
             label: "Deaths",
-            img: require('../../assets/grave.jpg'),
-            value: 22
+            img: require('../../assets/grave.jpg')
         }
     ],
     news: [
@@ -43,9 +42,25 @@ const info = {
 
 export default function Home() {
     const [isLoading, setLoading] = React.useState(true);
+    const [isRefreshing, setRefreshing] = React.useState(false);
+    const rotateAnim = React.useRef(new Animated.Value(0));
+    const rotate = rotateAnim.current.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    });
+    const loadStats = () => {
+        return getGhanaStats()
+            .then(stats => {
+                info.stats[0].value = stats.cases;
+                info.stats[1].value = stats.recovered;
+                info.stats[2].value = stats.deaths;
+                info.updated_at = stats.updated;
+            })
+            .catch(() => alert('Please check your internet connection and try again.'))
+    };
 
     React.useEffect(() => {
-        setTimeout(setLoading, 1000, false);
+        loadStats().finally(() => setLoading(false));
     }, []);
 
     return (
@@ -68,15 +83,40 @@ export default function Home() {
                                             <TouchableNativeFeedback>
                                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 20 }}>
                                                     <Text style={styles.stat_card_title}>{item.label}</Text>
-                                                    <Text style={styles.stat_card_value}>{item.value}</Text>
+                                                    <Text style={styles.stat_card_value}>{item.value || '--'}</Text>
                                                 </View>
                                             </TouchableNativeFeedback>
                                         </View>
                                     )}
                                 />
-                                <View style={{ padding: 20 }}>
-                                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>News</Text>
-                                    <Text>Last updated {moment(info.updated_at).fromNow()}...</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', padding: 20 }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>News</Text>
+                                        <Text>Last updated {moment(info.updated_at).fromNow()}...</Text>
+                                    </View>
+                                    <TouchableNativeFeedback disabled={isRefreshing} onPress={() => {
+                                        setRefreshing(true);
+                                        let anim = Animated.loop(
+                                            Animated.timing(rotateAnim.current, {
+                                                toValue: 1,
+                                                duration: 1000,
+                                                easing: Easing.linear,
+                                                useNativeDriver: true
+                                            })
+                                        );
+                                        anim.start();
+                                        setTimeout(() => {
+                                            loadStats().finally(() => {
+                                                setRefreshing(false);
+                                                anim.stop();
+                                                rotateAnim.current.setValue(0);
+                                            });
+                                        }, 1000);
+                                    }}>
+                                        <Animated.View style={{ padding: 10, transform: [{ rotate }] }}>
+                                            <Ionicons name="md-refresh" size={20} />
+                                        </Animated.View>
+                                    </TouchableNativeFeedback>
                                 </View>
                             </>
                         )}
