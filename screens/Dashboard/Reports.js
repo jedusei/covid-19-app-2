@@ -99,7 +99,7 @@ export default function Reports() {
     React.useEffect(() => {
         AsyncStorage.getItem('reports', (err, result) => {
             if (!err) {
-                setReports(JSON.parse(result));
+                setReports(JSON.parse(result) || []);
                 // setReports([]);
                 setTimeout(setLoading, 500, false);
             }
