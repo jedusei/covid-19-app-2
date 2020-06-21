@@ -1,85 +1,123 @@
 const SIGNALC_API_URL = "https://signalc.herokuapp.com/graphql";
 const COVID19_API_URL = "https://covid19-graphql.netlify.app/";
 
+
+function graphQL(API_URL, query, variables) {
+    return fetch(
+        API_URL,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query, variables })
+        }
+    ).then(res => res.json());
+}
+
+
 export function sendCode(phoneNumber) {
-    return fetch(SIGNALC_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            query: `
-                mutation sendCode($input: loginUserInput) {
-                    loginUser(input: $input) {
-                        success
-                        message
-                    }
-                }
-            `,
-            variables: {
-                input: { phone: phoneNumber }
+    return graphQL(
+        SIGNALC_API_URL,
+        `mutation sendCode($input: loginUserInput) {
+            loginUser(input: $input) {
+                success
+                message
             }
-        })
-    })
-        .then(response => response.json())
-        .then(response => {
-            if (!response.data || !response.data.loginUser || response.data.loginUser.success !== true) {
-                console.error(response);
-                throw new Error("GRAPHQL_ERROR");
-            }
-        });
+        }`,
+        { input: { phone: phoneNumber } }
+    ).then(response => {
+        if (!response.data || !response.data.loginUser || response.data.loginUser.success !== true) {
+            console.error(response);
+            throw new Error("GRAPHQL_ERROR");
+        }
+    });
 }
 
 export function verifyCode(phoneNumber, code) {
-    return fetch(SIGNALC_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            query: `
-                mutation verifyCode($input: validateLoginUserInput) {
-                    validateLoginUser(input: $input) {
-                        mobileToken 
-                        user {
-                            age
-                            gender
-                            lastCountriesVisited
-                            licenseNumber
-                        }
-                    }
-                }
-            `,
-            variables: {
-                input: {
-                    phone: phoneNumber,
-                    otp: code
+    return graphQL(
+        SIGNALC_API_URL,
+        `mutation verifyCode($input: validateLoginUserInput) {
+            validateLoginUser(input: $input) {
+                mobileToken 
+                user {
+                    age
+                    gender
+                    lastCountriesVisited
+                    licenseNumber
                 }
             }
-        })
-    })
-        .then(response => response.json())
-        .then(response => {
-            if (response.data)
-                return response.data.validateLoginUser;
-            else
-                return null;
-        });
+        }`,
+        { input: { phone: phoneNumber, otp: code } }
+    ).then(response => {
+        if (response.data)
+            return response.data.validateLoginUser;
+        else
+            return null;
+    });
 }
 
 export function getGhanaStats() {
-    return fetch(COVID19_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            query: `{
-                    country(name:"Ghana") {  
-                        result { 
-                            cases 
-                            recovered 
-                            deaths 
-                            updated
-                        }
-                    }
-                }`
-        })
-    })
-        .then(r => r.json())
-        .then(response => response.data.country.result);
+    return graphQL(
+        COVID19_API_URL,
+        `{
+            country(name: "Ghana") {  
+                result { 
+                    cases 
+                    recovered 
+                    deaths 
+                    updated
+                }
+            }
+        }`
+    ).then(response => response.data.country.result);
 }
+
+export function getCountries() {
+    return graphQL(
+        COVID19_API_URL,
+        `{
+            countries {
+                country
+                countryInfo {
+                    flag
+                }
+            }
+        }`
+    ).then(response => response.data.countries.map(c => {
+        return {
+            name: c.country,
+            flag: c.countryInfo.flag
+        };
+    }));
+}
+
+export function getWorldStats() {
+    return graphQL(
+        COVID19_API_URL,
+        `{
+            globalTotal {
+                confirmed: cases
+                recovered
+                deaths
+            }
+        }`
+    ).then(response => response.data.globalTotal);
+}
+
+export function getCountryStats(country) {
+    return graphQL(
+        COVID19_API_URL,
+        `{
+            country(name: "${country}") {
+                result {
+                    confirmed: cases
+                    tests
+                    deaths
+                    active
+                    recovered
+                    critical
+                    updated
+                }
+            }
+        }`
+    ).then(response => response.data.country.result);
+} 
