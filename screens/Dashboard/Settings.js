@@ -7,7 +7,7 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { Feather, EvilIcons, AntDesign, Ionicons } from '@expo/vector-icons';
 import AppModal from '../../components/AppModal';
 import openMap from 'react-native-open-maps'
-import { getWorldStats, getCountryStats, getCountries } from '../../api';
+import { getWorldStats, getCountryStats, getCountries, getTestingCentres } from '../../api';
 import moment from 'moment';
 
 const FAQs = require('../../assets/faqs.json');
@@ -43,107 +43,6 @@ const sections = [
     {
         title: "Share",
         description: "Share this app with friends and family",
-    }
-];
-const testing_centres = [
-    {
-        "name": "Medifem Hospital & Laboratories",
-        "address": "Westlands Blvd, Accra, Ghana",
-        "placesName": "Westlands",
-        "location": {
-            "coordinates": [
-                -0.2077531,
-                5.6572118
-            ]
-        }
-    },
-    {
-        "name": "Adenta Medical Centre",
-        "address": "Legon, Accra, Ghana",
-        "placesName": "Adenta",
-        "location": {
-            "coordinates": [
-                -0.1954516,
-                5.650697099999999
-            ]
-        }
-    },
-    {
-        "name": "Nyaho Medical Center",
-        "address": "Accra",
-        "placesName": "Airport Residential Area, 35 Kofi Annan St, Accra, Ghana",
-        "location": {
-            "coordinates": [
-                -0.1850195,
-                5.6142401
-            ]
-        }
-    },
-    {
-        "name": "Nyaho Medical Center",
-        "address": "No. 12 quashie road",
-        "placesName": "Kwabena Aniefe Street No. 1, Accra, Ghana",
-        "location": {
-            "coordinates": [
-                -0.2051318,
-                5.6148583
-            ]
-        }
-    },
-    {
-        "name": "Ani-Fori Medical Institute",
-        "address": "West Legon",
-        "placesName": "Accra, Ghana",
-        "location": {
-            "coordinates": [
-                -0.1869644,
-                5.6037168
-            ]
-        }
-    },
-    {
-        "name": "Here We Go",
-        "address": "Housing Down",
-        "placesName": "Legon, Accra, Ghana",
-        "location": {
-            "coordinates": [
-                -0.1954516,
-                5.650697099999999
-            ]
-        }
-    },
-    {
-        "name": "Adenta Municipality",
-        "address": "New Site",
-        "placesName": null,
-        "location": {
-            "coordinates": [
-                -0.15418,
-                5.7141674
-            ]
-        }
-    },
-    {
-        "name": "Here",
-        "address": "123 Street",
-        "placesName": null,
-        "location": {
-            "coordinates": [
-                -0.1869644,
-                5.6037168
-            ]
-        }
-    },
-    {
-        "name": "Simple Testing Site",
-        "address": "A simple address",
-        "placesName": null,
-        "location": {
-            "coordinates": [
-                20.748237,
-                34.473883
-            ]
-        }
     }
 ];
 
@@ -329,18 +228,32 @@ function ExpandableSection({ title, content }) {
 
 function TestingCentresModal({ visible, onRequestClose }) {
     const [isLoading, setLoading] = React.useState(true);
+    const [testingCentres, setTestingCentres] = React.useState();
     const [selectedCentre, setSelectedCentre] = React.useState();
+    const loadCentres = () => {
+        if (isLoading) {
+            getTestingCentres()
+                .then(result => {
+                    setTestingCentres(result);
+                })
+                .catch((err) => {
+                    alert("Please make sure you're connected to the internet and try again.");
+                    onRequestClose();
+                })
+                .finally(() => setLoading(false));
+        }
+    }
     return (
         <>
-            <AppModal title="Testing Centres" visible={visible} onRequestClose={onRequestClose} onShow={() => isLoading && setTimeout(setLoading, 1000, false)}>
+            <AppModal title="Testing Centres" visible={visible} onRequestClose={onRequestClose} onShow={loadCentres}>
                 {isLoading ?
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <ActivityIndicator size={40} />
                     </View>
                     :
                     <FlatList
-                        data={testing_centres}
-                        keyExtractor={item => item.address}
+                        data={testingCentres}
+                        keyExtractor={(item, index) => String(index)}
                         ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: "#e2e2e2" }} />}
                         renderItem={({ item }) => (
                             <TouchableNativeFeedback onPress={() => setSelectedCentre(item)}>

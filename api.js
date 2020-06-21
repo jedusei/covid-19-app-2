@@ -1,7 +1,6 @@
 const SIGNALC_API_URL = "https://signalc.herokuapp.com/graphql";
 const COVID19_API_URL = "https://covid19-graphql.netlify.app/";
 
-
 function graphQL(API_URL, query, variables) {
     return fetch(
         API_URL,
@@ -120,4 +119,18 @@ export function getCountryStats(country) {
             }
         }`
     ).then(response => response.data.country.result);
-} 
+}
+
+export function getTestingCentres() {
+    return graphQL(
+        SIGNALC_API_URL,
+        `{
+            testingSites {
+              name
+              address
+              placesName
+              location {coordinates}
+            }
+        }`
+    ).then(response => response.data.testingSites);
+}
