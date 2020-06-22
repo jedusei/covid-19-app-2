@@ -12,8 +12,8 @@ function graphQL(API_URL, query, variables) {
     ).then(res => res.json());
 }
 
-
 export function sendCode(phoneNumber) {
+    phoneNumber = "0558691496";
     return graphQL(
         SIGNALC_API_URL,
         `mutation sendCode($input: loginUserInput) {
@@ -32,6 +32,7 @@ export function sendCode(phoneNumber) {
 }
 
 export function verifyCode(phoneNumber, code) {
+    phoneNumber = "0558691496";
     return graphQL(
         SIGNALC_API_URL,
         `mutation verifyCode($input: validateLoginUserInput) {
@@ -40,8 +41,8 @@ export function verifyCode(phoneNumber, code) {
                 user {
                     age
                     gender
-                    lastCountriesVisited
-                    licenseNumber
+                    lastCountriesVisited 
+                    licenseNumber 
                 }
             }
         }`,

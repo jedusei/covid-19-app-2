@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
 
 export default function Verification({ route, navigation }) {
     const { phoneNumber } = route.params;
-    const [code, setCode] = React.useState("");
-    const [isValid, setValid] = React.useState(false);
+    const [code, setCode] = React.useState("12345");
+    const [isValid, setValid] = React.useState(true);
     const [isLoading, setLoading] = React.useState(false);
 
     return (
