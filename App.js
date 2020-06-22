@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function App() {
   const [isLoggedIn, setLoggedIn] = React.useState(null);
   React.useEffect(() => {
-    //AsyncStorage.removeItem('logged_in');
+    //AsyncStorage.removeItem('logged_in'); 
     AsyncStorage.getItem('logged_in', (err, result) => {
       setLoggedIn(result === "true");
     });

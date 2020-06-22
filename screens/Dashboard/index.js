@@ -9,11 +9,12 @@ import {
     Text, View, StyleSheet,
     Image, TouchableOpacity,
     TouchableNativeFeedback, TextInput,
-    CheckBox, ActivityIndicator, Alert
+    CheckBox, ActivityIndicator, Alert, AsyncStorage
 } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import AppModal from '../../components/AppModal';
 import moment from 'moment';
+import { getNotifications } from '../../api';
 
 const Tab = createBottomTabNavigator();
 const tabs = [
@@ -44,12 +45,12 @@ export default function Dashboard() {
             }}>
             {tabs.map(tab =>
                 <Tab.Screen key={tab.name} name={tab.name}>
-                    {() => {
+                    {({ navigation }) => {
                         let Component = tab.component;
                         return (
                             <View style={styles.container}>
                                 <Header title={tab.title || tab.name} />
-                                <Component />
+                                <Component navigation={navigation} />
                             </View>
                         );
                     }}
@@ -83,18 +84,45 @@ function Header({ title }) {
 
 function ProfileModal({ visible, onRequestClose }) {
     const [isLoading, setLoading] = React.useState(false);
-    const [isMale, setIsMale] = React.useState();
+    const [isMale, setIsMale] = React.useState(true);
     const [age, setAge] = React.useState("");
-    const [ageIsValid, setAgeValid] = React.useState(false);
+    const [ageIsValid, setAgeValid] = React.useState(true);
     const [firstVisitedCountry, setFirstVisitedCountry] = React.useState(countries[0]);
     const [secondVisitedCountry, setSecondVisitedCountry] = React.useState(countries[0]);
     const [currentCountryIndex, setCurrentCountryIndex] = React.useState(-1);
     const [showCountries, setShowCountries] = React.useState(false);
     const [healthLicenseNo, setHealthLicenseNo] = React.useState("");
     const isValid = ageIsValid && (isMale !== undefined);
+
+    const loadUserData = () => {
+        AsyncStorage.getItem('user', (err, user) => {
+            user = JSON.parse(user);
+            setIsMale(user.gender === "male");
+            setAge(String(user.age));
+            setFirstVisitedCountry(countries.find(c => c.name === user.lastCountriesVisited[0]) || countries[0]);
+            setSecondVisitedCountry(countries.find(c => c.name === user.lastCountriesVisited[1]) || countries[1]);
+            setHealthLicenseNo(user.licenseNumber);
+        });
+    };
+
+    const saveUserData = () => {
+        let user = {
+            gender: isMale ? "male" : "female",
+            age: Number.parseInt(age),
+            licenseNumber: healthLicenseNo,
+            lastCountriesVisited: [firstVisitedCountry.name, secondVisitedCountry.name]
+        };
+
+        return new Promise(resolve => {
+            AsyncStorage.setItem('user', JSON.stringify(user), () => {
+                setTimeout(resolve, 1500);
+            });
+        })
+    };
+
     return (
         <>
-            <AppModal title="Profile" animationType='slide' visible={visible} onRequestClose={onRequestClose}>
+            <AppModal title="Profile" animationType='slide' visible={visible} onRequestClose={onRequestClose} onShow={loadUserData}>
                 <ScrollView contentContainerStyle={{ paddingTop: 10, paddingHorizontal: 20 }}>
                     <Text style={styles.section_title}>Personal details</Text>
                     <Text>Gender:</Text>
@@ -154,7 +182,7 @@ function ProfileModal({ visible, onRequestClose }) {
                         onPress={() => {
                             if (!isLoading) {
                                 setLoading(true);
-                                setTimeout(async () => {
+                                saveUserData().then(async () => {
                                     setLoading(false);
                                     await new Promise(resolve => {
                                         Alert.alert(
@@ -165,7 +193,7 @@ function ProfileModal({ visible, onRequestClose }) {
                                         );
                                     });
                                     onRequestClose();
-                                }, 2000);
+                                });
                             }
                         }}>
                         <View style={isValid ? styles.btn : styles.btn_disabled}>
@@ -214,44 +242,32 @@ function CountriesModal({ visible, selectedCountry, onSelectCountry, onRequestCl
     );
 }
 
-const notifications = [
-    {
-        date: new Date(Date.now() - 5000), // 5 seconds ago
-        message: "Lorem ipsum dolor"
-    },
-    {
-        date: new Date(Date.now() - 300000), // 5 mins ago
-        message: "Lorem ipsum dolor"
-    },
-    {
-        date: new Date(Date.now() - 1800000), // 30 mins ago
-        message: "Lorem ipsum dolor"
-    },
-    {
-        date: new Date(Date.now() - 7200000), // 2 hours ago
-        message: "Lorem ipsum dolor"
-    },
-    {
-        date: new Date(Date.now() - 86400000), // 1 day ago
-        message: "Lorem ipsum dolor"
-    },
-    {
-        date: new Date(Date.now() - 604800000), // 1 week ago
-        message: "Lorem ipsum dolor"
-    }
-];
 function NotificationsModal({ visible, onRequestClose }) {
     const [isLoading, setLoading] = React.useState(true);
-    function getNotifications() {
+    const [notifications, setNotifications] = React.useState();
+
+    const getNotifs = () => {
         setLoading(true);
-        setTimeout(setLoading, 1000, false);
+        setTimeout(() => {
+            getNotifications()
+                .then(notifs => {
+                    setNotifications(notifs);
+                })
+                .catch(() => {
+                    alert("Couldn't refresh notifications. Please make sure you're connected to the internet and try again.");
+                    if (!notifications)
+                        onRequestClose();
+                })
+                .finally(() => setLoading(false));
+        }, 500);
     }
+
     return (
         <AppModal title="Notifications"
             animationType='slide'
             visible={visible}
             onRequestClose={onRequestClose}
-            onShow={getNotifications}>
+            onShow={getNotifs}>
             {isLoading ?
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <ActivityIndicator size={40} />
@@ -259,11 +275,14 @@ function NotificationsModal({ visible, onRequestClose }) {
                 :
                 <FlatList
                     data={notifications}
-                    keyExtractor={(item) => String(item.date.getTime())}
+                    keyExtractor={(item) => String(item.date)}
                     ItemSeparatorComponent={() => <View style={{ backgroundColor: "#e2e2e2", height: 1 }} />}
                     renderItem={({ item }) => (
                         <View style={styles.notif_row}>
-                            <Text style={styles.notif_text}>{item.message}</Text>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.notif_title}>{item.title}</Text>
+                                <Text style={styles.notif_desc}>{item.title}</Text>
+                            </View>
                             <Text style={styles.notif_time}>{moment(item.date).fromNow()}</Text>
                         </View>
                     )}
@@ -349,8 +368,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 20
     },
-    notif_text: {
-        fontSize: 18
+    notif_title: {
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    notif_desc: {
+        fontSize: 15
     },
     notif_time: {
         fontSize: 12,

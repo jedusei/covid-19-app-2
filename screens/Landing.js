@@ -4,7 +4,7 @@ import {
     TextInput, StatusBar, ImageBackground, ActivityIndicator
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-
+import { sendCode } from '../api';
 
 const styles = StyleSheet.create({
     bg_image: {
@@ -90,10 +90,15 @@ export default function Landing({ navigation }) {
                     onPress={() => {
                         if (!isLoading) {
                             setLoading(true);
-                            setTimeout(() => {
-                                setLoading(false);
-                                navigation.navigate('Verification', { phoneNumber });
-                            }, 2000);
+                            sendCode(phoneNumber)
+                                .then(() => navigation.navigate('Verification', { phoneNumber }))
+                                .catch(err => {
+                                    if (err.message == 'GRAPHQL_ERROR')
+                                        alert("Something went wrong. Please try again later.");
+                                    else
+                                        alert("Please make sure you're connected to the internet and try again.");
+                                })
+                                .finally(() => setLoading(false));
                         }
                     }}>
                     <View style={isValid ? styles.btn : styles.btn_disabled}>

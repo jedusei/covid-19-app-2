@@ -3,6 +3,7 @@ import {
     AsyncStorage, View, Text, StyleSheet, TouchableNativeFeedback,
     TextInput, StatusBar, TouchableOpacity, ActivityIndicator
 } from 'react-native';
+import { sendCode, verifyCode, getReports, getVitals } from '../api';
 
 const styles = StyleSheet.create({
     container: {
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
 
 export default function Verification({ route, navigation }) {
     const { phoneNumber } = route.params;
-    const [code, setCode] = React.useState("");
-    const [isValid, setValid] = React.useState(false);
+    const [code, setCode] = React.useState("12345");
+    const [isValid, setValid] = React.useState(true);
     const [isLoading, setLoading] = React.useState(false);
 
     return (
@@ -62,7 +63,7 @@ export default function Verification({ route, navigation }) {
                 </Text>
             <View style={{ marginVertical: 50, borderBottomWidth: 1, width: 200 }}>
                 <TextInput
-                    keyboardType="phone-pad"
+                    keyboardType="number-pad"
                     placeholder="XXXXX"
                     maxLength={5}
                     value={code}
@@ -77,16 +78,27 @@ export default function Verification({ route, navigation }) {
                 onPress={() => {
                     if (!isLoading) {
                         setLoading(true);
-                        setTimeout(async () => {
-                            setLoading(false);
-                            if (code == "12345") {
-                                await AsyncStorage.setItem('logged_in', "true");
-                                navigation.reset({ index: 0, routes: [{ name: 'GeneralInfo' }] });
-                            }
-                            else {
-                                alert("The code you entered is invalid.");
-                            }
-                        }, 2000);
+                        verifyCode(phoneNumber, code)
+                            .then(async (result) => {
+                                if (!result)
+                                    alert("The code you entered is invalid.");
+                                else {
+                                    let reports = await getReports();
+                                    let vitals = await getVitals();
+                                    await AsyncStorage.multiSet([
+                                        ['logged_in', 'true'],
+                                        ['access_token', result.mobileToken],
+                                        ['user', JSON.stringify(result.user)],
+                                        ['reports', JSON.stringify(reports)],
+                                        ['vitals', JSON.stringify(vitals)]
+                                    ]);
+                                    navigation.reset({ index: 0, routes: [{ name: 'GeneralInfo' }] });
+                                }
+                            })
+                            .catch(() => {
+                                alert("Please make sure you're connected to the internets and try again.");
+                            })
+                            .finally(() => setLoading(false));
                     }
                 }}>
                 <View style={isValid ? styles.btn : styles.btn_disabled}>
@@ -99,7 +111,7 @@ export default function Verification({ route, navigation }) {
             </TouchableNativeFeedback>
             <Text style={{ marginTop: 10 }}>Didn't receive the code?</Text>
             <View style={{ flexDirection: 'row' }}>
-                <TouchableOpacity onPress={() => alert("The code has been re-sent.")}>
+                <TouchableOpacity onPress={() => sendCode(phoneNumber).catch(() => alert("Please make sure you're connected to the internet and try again."))}>
                     <Text style={styles.link}>Re-send the code</Text>
                 </TouchableOpacity>
                 <Text> or </Text>
@@ -107,6 +119,6 @@ export default function Verification({ route, navigation }) {
                     <Text style={styles.link}>Send the code to a different number</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </View >
     );
 }
