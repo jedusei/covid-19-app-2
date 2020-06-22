@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     Text, View, StyleSheet, TouchableOpacity, Image,
-    TouchableNativeFeedback, Modal, Platform, ActivityIndicator
+    TouchableNativeFeedback, Modal, Platform,
+    ActivityIndicator, Alert, AsyncStorage
 } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { Feather, EvilIcons, AntDesign, Ionicons } from '@expo/vector-icons';
@@ -67,6 +68,14 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         alignItems: 'center',
         paddingVertical: 15,
+        backgroundColor: '#313131'
+    },
+    btn_logout: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 30,
+        paddingVertical: 15,
+        marginVertical: 15,
         backgroundColor: '#313131'
     },
     faq_title: {
@@ -140,7 +149,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function Settings() {
+export default function Settings({ navigation }) {
     const [currentModal, setCurrentModal] = React.useState();
     const modals = {
         'self_assessment': SelfAssessmentModal,
@@ -148,6 +157,19 @@ export default function Settings() {
         'testing_centres': TestingCentresModal,
         'stats': WorldStatsModal
     };
+    const logout = () => {
+        Alert.alert('Confirmation', "Are you sure you want to logout?", [
+            { text: "Cancel" },
+            {
+                text: "OK",
+                onPress: () => {
+                    AsyncStorage.removeItem('logged_in');
+                    navigation.navigate("Landing");
+                }
+            }
+        ]);
+    };
+
     return (
         <>
             <View style={styles.container}>
@@ -166,6 +188,13 @@ export default function Settings() {
                             </View>
                         </TouchableNativeFeedback>
                     )}
+                    ListFooterComponent={() =>
+                        <TouchableNativeFeedback onPress={logout}>
+                            <View style={styles.btn_logout}>
+                                <Text style={{ fontSize: 20, color: '#fff' }}>Logout</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                    }
                 />
             </View>
             {Object.entries(modals).map(([key, Component]) =>

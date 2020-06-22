@@ -45,12 +45,12 @@ export default function Dashboard() {
             }}>
             {tabs.map(tab =>
                 <Tab.Screen key={tab.name} name={tab.name}>
-                    {() => {
+                    {({ navigation }) => {
                         let Component = tab.component;
                         return (
                             <View style={styles.container}>
                                 <Header title={tab.title || tab.name} />
-                                <Component />
+                                <Component navigation={navigation} />
                             </View>
                         );
                     }}
