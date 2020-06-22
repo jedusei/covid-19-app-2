@@ -6,7 +6,7 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
-import { getGhanaStats } from '../../api';
+import { getCountryStats } from '../../api';
 
 const info = {
     updated_at: new Date(),
@@ -49,9 +49,9 @@ export default function Home() {
         outputRange: ['0deg', '360deg']
     });
     const loadStats = () => {
-        return getGhanaStats()
+        return getCountryStats("Ghana")
             .then(stats => {
-                info.stats[0].value = stats.cases;
+                info.stats[0].value = stats.confirmed;
                 info.stats[1].value = stats.recovered;
                 info.stats[2].value = stats.deaths;
                 info.updated_at = stats.updated;

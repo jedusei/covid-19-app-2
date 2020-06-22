@@ -55,22 +55,6 @@ export function verifyCode(phoneNumber, code) {
     });
 }
 
-export function getGhanaStats() {
-    return graphQL(
-        COVID19_API_URL,
-        `{
-            country(name: "Ghana") {  
-                result { 
-                    cases 
-                    recovered 
-                    deaths 
-                    updated
-                }
-            }
-        }`
-    ).then(response => response.data.country.result);
-}
-
 export function getCountries() {
     return graphQL(
         COVID19_API_URL,
