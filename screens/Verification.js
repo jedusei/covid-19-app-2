@@ -3,7 +3,7 @@ import {
     AsyncStorage, View, Text, StyleSheet, TouchableNativeFeedback,
     TextInput, StatusBar, TouchableOpacity, ActivityIndicator
 } from 'react-native';
-import { sendCode, verifyCode, getReports } from '../api';
+import { sendCode, verifyCode, getReports, getVitals } from '../api';
 
 const styles = StyleSheet.create({
     container: {
@@ -84,11 +84,13 @@ export default function Verification({ route, navigation }) {
                                     alert("The code you entered is invalid.");
                                 else {
                                     let reports = await getReports();
+                                    let vitals = await getVitals();
                                     await AsyncStorage.multiSet([
                                         ['logged_in', 'true'],
                                         ['access_token', result.mobileToken],
                                         ['user', JSON.stringify(result.user)],
                                         ['reports', JSON.stringify(reports)],
+                                        ['vitals', JSON.stringify(vitals)]
                                     ]);
                                     navigation.reset({ index: 0, routes: [{ name: 'GeneralInfo' }] });
                                 }

@@ -8,6 +8,15 @@ import FloatingActionButton from '../../components/FloatingActionButton';
 import AppModal from '../../components/AppModal';
 import moment from 'moment';
 
+const labels = {
+    dryCough: "Dry Cough",
+    tiredness: "Tiredness",
+    soreThroat: "Sore Throat",
+    fever: "Fever",
+    aches: "Aches & Pains",
+    shortnessOfBreath: "Shortness of Breath"
+};
+
 const ratings = [
     { id: 0, label: "None", color: '#73e403' },
     { id: 1, label: "Mild", color: '#00c300' },
@@ -67,7 +76,7 @@ export default function Vitals() {
                                         const { label, color } = ratings[value];
                                         return (
                                             <View style={{ flex: 1, margin: 5, paddingVertical: 20, paddingHorizontal: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: color, borderRadius: 10 }}>
-                                                <Text numberOfLines={1} style={{ fontWeight: 'bold', color: '#fff', textShadowColor: 'black', textShadowRadius: 1, }}>{key}</Text>
+                                                <Text numberOfLines={1} style={{ fontWeight: 'bold', color: '#fff', textShadowColor: 'black', textShadowRadius: 1, }}>{labels[key]}</Text>
                                                 <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#fff', textShadowColor: 'black', textShadowRadius: 1, }}>{value}</Text>
                                                 <Text style={{ color: '#fff', fontWeight: 'bold', textShadowColor: 'black', textShadowRadius: 1, }}>{`(${label})`}</Text>
                                             </View>
@@ -93,12 +102,12 @@ export default function Vitals() {
 function LogSymptomsModal({ visible, onLogSymptoms, onRequestClose }) {
     const [isLoading, setLoading] = React.useState(false);
     const initialSymptoms = {
-        "Dry Cough": -1,
-        "Tiredness": -1,
-        "Sore Throat": -1,
-        "Fever": -1,
-        "Aches & Pains": -1,
-        "Shortness of Breath": -1
+        dryCough: -1,
+        tiredness: -1,
+        soreThroat: -1,
+        fever: -1,
+        aches: -1,
+        shortnessOfBreath: -1
     };
     const [symptoms, setSymptoms] = React.useState(initialSymptoms);
     const entries = Object.entries(symptoms);
@@ -118,7 +127,7 @@ function LogSymptomsModal({ visible, onLogSymptoms, onRequestClose }) {
                 renderItem={({ item }) => {
                     const [key, value] = item;
                     return (
-                        <SymptomRating key={key} title={key} value={value}
+                        <SymptomRating key={key} title={labels[key]} value={value}
                             onChangeValue={(newValue) => {
                                 symptoms[key] = newValue;
                                 setSymptoms(Object.assign({}, symptoms));

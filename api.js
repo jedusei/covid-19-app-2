@@ -86,6 +86,28 @@ export function getReports() {
     ).then(response => response.data.reportedCases.filter(c => c.user.phone === "0558691496"));
 }
 
+export function getVitals() {
+    return graphQL(
+        SIGNALC_API_URL,
+        `{
+            vitals {
+              user {
+                phone
+              }
+              symptoms: vitals {
+                dryCough
+                tiredness
+                soreThroat
+                fever
+                aches
+                shortnessOfBreath
+              }
+              date: createdAt
+            }
+        }`,
+    ).then(response => response.data.vitals.filter(v => v.user.phone === "0558691496"));
+}
+
 export function getCountries() {
     return graphQL(
         COVID19_API_URL,
