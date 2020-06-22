@@ -55,6 +55,19 @@ export function verifyCode(phoneNumber, code) {
     });
 }
 
+export function getNotifications() {
+    return graphQL(
+        SIGNALC_API_URL,
+        `{
+            broadcastMessages {
+              title
+              description
+              date: createdAt
+            }
+        }`,
+    ).then(response => response.data.broadcastMessages);
+}
+
 export function getCountries() {
     return graphQL(
         COVID19_API_URL,
