@@ -100,7 +100,6 @@ export default function Reports() {
         AsyncStorage.getItem('reports', (err, result) => {
             if (!err) {
                 setReports(JSON.parse(result) || []);
-                // setReports([]);
                 setTimeout(setLoading, 500, false);
             }
         })
@@ -139,7 +138,7 @@ export default function Reports() {
                                 <TouchableNativeFeedback onPress={() => setCurrentReport(item)}>
                                     <View style={styles.report_row}>
                                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                            <Text style={styles.report_target}>{item.target}</Text>
+                                            <Text style={styles.report_target}>{item.target == "self" ? "Self" : "Someone else"}</Text>
                                             <Text style={styles.report_time}>{moment(item.date).format("h:mm A")}</Text>
                                         </View>
                                         <Text numberOfLines={2}>{item.description}</Text>
@@ -269,7 +268,9 @@ function MakeReportModal({ visible, onMakeReport, onRequestClose }) {
                                 setLoading(false);
                                 report.date = new Date();
                                 if (report.isForSelf)
-                                    report.target = 'Self';
+                                    report.target = 'self';
+                                else
+                                    report.target = 'individual'
 
                                 delete report.isForSelf;
                                 onMakeReport(report);
@@ -306,7 +307,7 @@ function ViewReportModal({ visible, report, onRequestClose }) {
                             <View style={{ flexDirection: 'row' }}>
                                 <View style={{ flex: 1, marginRight: 50 }}>
                                     <Text style={styles.report_details_label}>Individual</Text>
-                                    <Text>{report.target}</Text>
+                                    <Text>{report.target == "self" ? "Self" : "Other"}</Text>
                                 </View>
                                 <View style={{ flex: 2 }}>
                                     <Text style={styles.report_details_label}>Date</Text>

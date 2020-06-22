@@ -68,6 +68,24 @@ export function getNotifications() {
     ).then(response => response.data.broadcastMessages);
 }
 
+export function getReports() {
+    return graphQL(
+        SIGNALC_API_URL,
+        `{
+            reportedCases {
+              target: reporting
+              location
+              date: createdAt
+              landmark: nearestLandmark
+              description
+              user {
+                phone
+              }
+            }
+        }`,
+    ).then(response => response.data.reportedCases.filter(c => c.user.phone === "0558691496"));
+}
+
 export function getCountries() {
     return graphQL(
         COVID19_API_URL,
