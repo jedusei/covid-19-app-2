@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "covid-19-app-full",
-    "slug": "covid-19-app-full",
+    "name": "covers-app",
+    "slug": "covers-app",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }
