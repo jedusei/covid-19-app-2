@@ -9,7 +9,7 @@ import {
     Text, View, StyleSheet,
     Image, TouchableOpacity,
     TouchableNativeFeedback, TextInput,
-    CheckBox, ActivityIndicator, Alert
+    CheckBox, ActivityIndicator, Alert, AsyncStorage
 } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import AppModal from '../../components/AppModal';
@@ -83,18 +83,45 @@ function Header({ title }) {
 
 function ProfileModal({ visible, onRequestClose }) {
     const [isLoading, setLoading] = React.useState(false);
-    const [isMale, setIsMale] = React.useState();
+    const [isMale, setIsMale] = React.useState(true);
     const [age, setAge] = React.useState("");
-    const [ageIsValid, setAgeValid] = React.useState(false);
+    const [ageIsValid, setAgeValid] = React.useState(true);
     const [firstVisitedCountry, setFirstVisitedCountry] = React.useState(countries[0]);
     const [secondVisitedCountry, setSecondVisitedCountry] = React.useState(countries[0]);
     const [currentCountryIndex, setCurrentCountryIndex] = React.useState(-1);
     const [showCountries, setShowCountries] = React.useState(false);
     const [healthLicenseNo, setHealthLicenseNo] = React.useState("");
     const isValid = ageIsValid && (isMale !== undefined);
+
+    const loadUserData = () => {
+        AsyncStorage.getItem('user', (err, user) => {
+            user = JSON.parse(user);
+            setIsMale(user.gender === "male");
+            setAge(String(user.age));
+            setFirstVisitedCountry(countries.find(c => c.name === user.lastCountriesVisited[0]) || countries[0]);
+            setSecondVisitedCountry(countries.find(c => c.name === user.lastCountriesVisited[1]) || countries[1]);
+            setHealthLicenseNo(user.licenseNumber);
+        });
+    };
+
+    const saveUserData = () => {
+        let user = {
+            gender: isMale ? "male" : "female",
+            age: Number.parseInt(age),
+            licenseNumber: healthLicenseNo,
+            lastCountriesVisited: [firstVisitedCountry.name, secondVisitedCountry.name]
+        };
+
+        return new Promise(resolve => {
+            AsyncStorage.setItem('user', JSON.stringify(user), () => {
+                setTimeout(resolve, 1500);
+            });
+        })
+    };
+
     return (
         <>
-            <AppModal title="Profile" animationType='slide' visible={visible} onRequestClose={onRequestClose}>
+            <AppModal title="Profile" animationType='slide' visible={visible} onRequestClose={onRequestClose} onShow={loadUserData}>
                 <ScrollView contentContainerStyle={{ paddingTop: 10, paddingHorizontal: 20 }}>
                     <Text style={styles.section_title}>Personal details</Text>
                     <Text>Gender:</Text>
@@ -154,7 +181,7 @@ function ProfileModal({ visible, onRequestClose }) {
                         onPress={() => {
                             if (!isLoading) {
                                 setLoading(true);
-                                setTimeout(async () => {
+                                saveUserData().then(async () => {
                                     setLoading(false);
                                     await new Promise(resolve => {
                                         Alert.alert(
@@ -165,7 +192,7 @@ function ProfileModal({ visible, onRequestClose }) {
                                         );
                                     });
                                     onRequestClose();
-                                }, 2000);
+                                });
                             }
                         }}>
                         <View style={isValid ? styles.btn : styles.btn_disabled}>
